@@ -2,15 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ 
-  inputs, vars, pkgs, ... 
+{
+  inputs,
+  vars,
+  pkgs,
+  ...
 }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -18,9 +21,10 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  # Enable if you want to see Windows (or other OSes you may install) in future
+  # boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "deskmiddle"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -48,13 +52,8 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  
+
   programs.sway.enable = true;
 
   # Configure keymap in X11
@@ -65,6 +64,15 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  services.tailscale.enable = true;
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 * * * * jack cp $HOME/.zsh_history $HOME/.cache/zsh_history"
+    ];
+  };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -89,28 +97,14 @@
   users.users.jack = {
     isNormalUser = true;
     description = "Jack";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
+    extraGroups = [
+      "networkmanager"
+      "wheel"
     ];
+    shell = pkgs.zsh;
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    git
-    discord
-  ];
+  programs.zsh.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
@@ -119,6 +113,32 @@
     };
     users.jack = import ./home.nix;
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "jack" ];
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    git
+    htop
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
