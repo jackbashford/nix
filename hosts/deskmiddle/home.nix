@@ -141,11 +141,13 @@
     ghostty = {
       enable = true;
       settings = {
-        cursor-style = "bar";
-        shell-integration-features = "no-cursor";
         confirm-close-surface = false;
+        cursor-style = "bar";
+        gtk-single-instance = true;
         gtk-titlebar = false;
+        shell-integration-features = "no-cursor";
         window-decoration = false;
+        window-theme = "ghostty";
       };
     };
 
@@ -176,7 +178,7 @@
 
       shellAliases = {
         j = "zellij";
-        ls = "lsd -A";
+        ls = "lsd -1";
         cat = "bat";
       };
     };

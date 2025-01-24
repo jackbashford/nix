@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  config,
   inputs,
   vars,
   pkgs,
@@ -23,6 +24,29 @@
   boot.loader.grub.device = "nodev";
   # Enable if you want to see Windows (or other OSes you may install) in future
   # boot.loader.grub.useOSProber = true;
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  environment.etc.nixos-current.source = ./.;
+
+  # NVIDIA setup
+  # hardware.graphics.enable = true;
+
+  # services.xserver.videoDrivers = [ "nvidia" ];
+
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+
+  #   powerManagement.enable = false;
+
+  #   powerManagement.finegrained = false;
+
+  #   open = false;
+
+  #   nvidiaSettings = true;
+
+  #   package = config.boot.kernelPackages.nvidiaPackages.production;
+  # };
 
   networking.hostName = "deskmiddle"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
