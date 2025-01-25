@@ -27,26 +27,32 @@
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  environment.etc.nixos-current.source = ./.;
+  environment.etc.nixos-current.source = inputs.self.outPath;
+
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_drm"
+  ];
 
   # NVIDIA setup
-  # hardware.graphics.enable = true;
+  hardware.graphics.enable = true;
 
-  # services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
 
-  #   powerManagement.enable = false;
+    powerManagement.enable = false;
 
-  #   powerManagement.finegrained = false;
+    powerManagement.finegrained = false;
 
-  #   open = false;
+    open = true;
 
-  #   nvidiaSettings = true;
+    nvidiaSettings = true;
 
-  #   package = config.boot.kernelPackages.nvidiaPackages.production;
-  # };
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   networking.hostName = "deskmiddle"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
