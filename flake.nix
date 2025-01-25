@@ -10,24 +10,32 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, catppuccin, ... }@inputs: {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      catppuccin,
+      ...
+    }@inputs:
+    {
 
-    nixosConfigurations = {
-      deskmiddle = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          vars.user = "jack";
+      nixosConfigurations = {
+        deskmiddle = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            vars.user = "jack";
+          };
+          modules = [
+            ./hosts/deskmiddle/configuration.nix
+            home-manager.nixosModules.home-manager
+            catppuccin.nixosModules.catppuccin
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+          ];
         };
-        modules = [
-          ./hosts/deskmiddle/configuration.nix
-          home-manager.nixosModules.home-manager
-          catppuccin.nixosModules.catppuccin
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
       };
     };
-  };
 }
