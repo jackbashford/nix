@@ -18,6 +18,8 @@
   catppuccin.zsh-syntax-highlighting.enable = false;
 
   home.packages = [
+    pkgs.ghostty
+
     pkgs.nil
     pkgs.nixfmt-rfc-style
 
@@ -27,8 +29,84 @@
     pkgs.erlang
   ];
 
-  wayland.windowManager.sway = {
+  xsession.windowManager.i3 = {
     enable = true;
+    config =
+      let
+        mod = "Mod4";
+        mod2 = "Mod1";
+        term = "${pkgs.ghostty}/bin/ghostty";
+        left = "h";
+        right = "l";
+        up = "k";
+        down = "j";
+      in
+      {
+        modifier = mod;
+        terminal = term;
+        keybindings = lib.mkOptionDefault (
+          # Remove the bad keybindings :p ...
+          (builtins.listToAttrs (
+            builtins.map
+              (u: {
+                name = u;
+                value = null;
+              })
+              [
+                "${mod}+Left"
+                "${mod}+Right"
+                "${mod}+Up"
+                "${mod}+Down"
+                "${mod}+Shift+Left"
+                "${mod}+Shift+Right"
+                "${mod}+Shift+Up"
+                "${mod}+Shift+Down"
+                "${mod}+a"
+                "${mod}+b"
+                "${mod}+s"
+                "${mod}+v"
+                "${mod}+w"
+              ]
+          ))
+          # ... and add the good ones!
+          // {
+            "${mod2}+Shift+l" = "exec ${pkgs.i3lock}/bin/i3lock -f -c 000000";
+            "${mod}+${left}" = "focus left";
+            "${mod}+${right}" = "focus right";
+            "${mod}+${up}" = "focus up";
+            "${mod}+${down}" = "focus down";
+            "${mod}+Shift+${left}" = "move left";
+            "${mod}+Shift+${right}" = "move right";
+            "${mod}+Shift+${up}" = "move up";
+            "${mod}+Shift+${down}" = "move down";
+            "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
+          }
+        );
+        bars = [
+          {
+            position = "top";
+            colors = {
+              statusline = "#ffffff";
+              background = "#323232";
+              # inactiveWorkspace = {
+              #   background = "#32323200";
+              #   border = "#32323200";
+              #   text = "#5c5c5c";
+              # };
+            };
+            statusCommand = "while date +'%Y-%m-%d %X'; do sleep 1; done";
+          }
+        ];
+        startup = [
+          {
+            command = "1password --silent";
+          }
+        ];
+      };
+  };
+
+  wayland.windowManager.sway = {
+    enable = false;
     extraOptions = [ "--unsupported-gpu" ];
     config =
       let
@@ -147,7 +225,7 @@
         gtk-single-instance = true;
         gtk-titlebar = false;
         shell-integration-features = "no-cursor";
-        window-decoration = false;
+        window-decoration = true;
         window-theme = "ghostty";
         working-directory = "home";
       };

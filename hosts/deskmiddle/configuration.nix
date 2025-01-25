@@ -25,28 +25,10 @@
   # Enable if you want to see Windows (or other OSes you may install) in future
   # boot.loader.grub.useOSProber = true;
 
-  hardware.graphics.enable = true;
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-
-    powerManagement.enable = false;
-
-    powerManagement.finegrained = false;
-
-    open = false;
-
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "uinput" ];
+  # boot.kernelModules = [ "uinput" ];
 
-  hardware.uinput.enable = true;
+  # hardware.uinput.enable = true;
 
   services.kanata = {
     enable = true;
@@ -55,10 +37,73 @@
       config = ''
         (defsrc caps)
 
-        (defalias caps (tap-hold 150 200 esc lctl))
-
-        (deflayer base @caps)
+        (deflayer base esc)
       '';
+    };
+  };
+
+  services.autorandr = {
+    enable = true;
+    profiles.default = {
+      fingerprint = {
+        DP-1 = "00ffffffffffff005a633ab701010101
+                021f0104a53c21783fcd25a3574b9f27
+                0d5054bfef80d1c0b300a940a9c09500
+                904081808140565e00a0a0a029503020
+                350056502100001a000000fd0030a5f3
+                f344010a202020202020000000fc0056
+                58323731382d324b50430a20000000ff
+                0057414c3231303230333031350a0113
+                02032cf15190050403021d1e1f141312
+                1101292f3f4023090707830100006d1a
+                0000020130a500000000000007fc0064
+                a0a01e503020350056502100001a9add
+                0078a0a01e503020350056502100001a
+                abb80078a0a01e503020350056502100
+                001afc9b0078a0a03250302035005650
+                2100001a0000000000000000000000b2";
+        DP-2 = "00ffffffffffff0005e3022783390000
+                26200104b53c22783f29d5ad4f44a724
+                0f5054bfef00d1c081803168317c4568
+                457c6168617c565e00a0a0a029503020
+                350055502100001e000000ff00584755
+                4e394841303134373233000000fc0051
+                3237473247335234420a2020000000fd
+                0030aaffff44010a2020202020200283
+                020332f14c0103051404131f12021190
+                3f2309070783010000e305e301e60607
+                016363006d1a0000020130aa00000000
+                000098fc006aa0a01e50082035005550
+                2100001a40e7006aa0a0675008209804
+                55502100001a6fc200a0a0a055503020
+                350055502100001ef03c00d051a03550
+                60883a0055502100001c0000000000f3
+                00ffffffffffff0005e3022783390000
+                26200104b53c22783f29d5ad4f44a724
+                0f5054bfef00d1c081803168317c4568
+                457c6168617c565e00a0a0a029503020
+                350055502100001e000000ff00584755
+                4e394841303134373233000000fc0051
+                3237473247335234420a2020000000fd
+                0030aaffff44010a2020202020200283";
+      };
+
+      config = {
+        DP-1 = {
+          enable = true;
+          primary = false;
+          position = "2560x0";
+          mode = "2560x1440";
+          rate = "165.00";
+        };
+        DP-2 = {
+          enable = true;
+          primary = true;
+          position = "0x0";
+          mode = "2560x1440";
+          rate = "165.00";
+        };
+      };
     };
   };
 
@@ -92,9 +137,21 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver = {
+    enable = true;
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        i3status
+      ];
+    };
+    displayManager = {
+      lightdm.enable = true;
+      defaultSession = "none+i3";
+    };
+  };
 
-  programs.sway.enable = true;
+  programs.sway.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
