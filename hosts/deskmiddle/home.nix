@@ -29,6 +29,7 @@
 
   wayland.windowManager.sway = {
     enable = true;
+    extraOptions = [ "--unsupported-gpu" ];
     config =
       let
         mod = "Mod4";
@@ -66,7 +67,7 @@
           ))
           # ... and add the good ones!
           // {
-            "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock";
+            "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
             "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
           }
         );
@@ -148,6 +149,7 @@
         shell-integration-features = "no-cursor";
         window-decoration = false;
         window-theme = "ghostty";
+        working-directory = "home";
       };
     };
 
@@ -212,9 +214,7 @@
       };
       languages = {
 
-        language-server.nil = {
-          command = "nil";
-        };
+        language-server.nil.command = "${pkgs.nil}/bin/nil";
 
         language = [
           {
@@ -225,11 +225,17 @@
               tab-width = 2;
               unit = "  ";
             };
-            formatter.command = "nixfmt";
+            formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
             language-servers = [ "nil" ];
           }
         ];
       };
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
     };
 
     bat = {

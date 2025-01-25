@@ -25,7 +25,42 @@
   # Enable if you want to see Windows (or other OSes you may install) in future
   # boot.loader.grub.useOSProber = true;
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.graphics.enable = true;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    powerManagement.enable = false;
+
+    powerManagement.finegrained = false;
+
+    open = false;
+
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "uinput" ];
+
+  hardware.uinput.enable = true;
+
+  services.kanata = {
+    enable = true;
+    keyboards.default = {
+      extraDefCfg = "process-unmapped-keys yes";
+      config = ''
+        (defsrc caps)
+
+        (defalias caps (tap-hold 150 200 esc lctl))
+
+        (deflayer base @caps)
+      '';
+    };
+  };
 
   environment.etc.nixos-current.source = inputs.self.outPath;
 
@@ -70,7 +105,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.tailscale.enable = true;
+  # services.tailscale.enable = true;
 
   services.cron = {
     enable = true;
