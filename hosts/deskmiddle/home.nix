@@ -44,6 +44,8 @@
       {
         modifier = mod;
         terminal = term;
+        workspaceAutoBackAndForth = true;
+        window.hideEdgeBorders = "both";
         keybindings = lib.mkOptionDefault (
           # Remove the bad keybindings :p ...
           (builtins.listToAttrs (
