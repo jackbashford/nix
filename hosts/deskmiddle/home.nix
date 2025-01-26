@@ -27,6 +27,8 @@
 
     pkgs.gleam
     pkgs.erlang
+
+    pkgs.jetbrains.idea-community
   ];
 
   xsession.windowManager.i3 = {
@@ -103,102 +105,12 @@
           {
             command = "1password --silent";
           }
-        ];
-      };
-  };
-
-  wayland.windowManager.sway = {
-    enable = false;
-    extraOptions = [ "--unsupported-gpu" ];
-    config =
-      let
-        mod = "Mod4";
-        mod2 = "Mod1";
-        term = "${pkgs.ghostty}/bin/ghostty";
-        menu = "${pkgs.wmenu}/bin/wmenu-run";
-      in
-      {
-        modifier = mod;
-        terminal = term;
-        menu = menu;
-        keybindings = lib.mkOptionDefault (
-          # Remove the bad keybindings :p ...
-          (builtins.listToAttrs (
-            builtins.map
-              (u: {
-                name = u;
-                value = null;
-              })
-              [
-                "${mod}+Left"
-                "${mod}+Right"
-                "${mod}+Up"
-                "${mod}+Down"
-                "${mod}+Shift+Left"
-                "${mod}+Shift+Right"
-                "${mod}+Shift+Up"
-                "${mod}+Shift+Down"
-                "${mod}+a"
-                "${mod}+b"
-                "${mod}+s"
-                "${mod}+v"
-                "${mod}+w"
-              ]
-          ))
-          # ... and add the good ones!
-          // {
-            "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
-            "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
-          }
-        );
-        bars = [
           {
-            position = "top";
-            colors = {
-              statusline = "#ffffff";
-              background = "#323232";
-              # inactiveWorkspace = {
-              #   background = "#32323200";
-              #   border = "#32323200";
-              #   text = "#5c5c5c";
-              # };
-            };
-            statusCommand = "while date +'%Y-%m-%d %X'; do sleep 1; done";
-          }
-        ];
-        startup = [
-          {
-            command = "1password --silent";
+            command = "--no-startup-id ${pkgs.xautolock}/bin/xautolock -time 5 -locker ${pkgs.i3lock}/bin/i3lock -c 000000";
           }
         ];
       };
   };
-
-  services.swayidle =
-    let
-      swaylock = "${pkgs.swaylock}/bin/swaylock";
-      swaymsg = "${pkgs.sway}/bin/swaymsg";
-    in
-    {
-      enable = true;
-      timeouts = [
-        {
-          timeout = 300;
-          command = "${swaylock} -f -c 000000";
-        }
-        {
-          timeout = 600;
-          command = "${swaymsg} \"output * power off\"";
-          resumeCommand = "${swaymsg} \"output * power on\"";
-        }
-      ];
-      events = [
-        {
-          event = "before-sleep";
-          command = "${swaylock} -f -c 000000";
-        }
-      ];
-    };
 
   programs = {
     git = {
@@ -222,13 +134,17 @@
     ghostty = {
       enable = true;
       settings = {
+        font-family = "Fira Code";
         confirm-close-surface = false;
         cursor-style = "bar";
         gtk-single-instance = true;
-        gtk-titlebar = false;
         shell-integration-features = "no-cursor";
+
+        gtk-titlebar = false;
         window-decoration = true;
         window-theme = "ghostty";
+
+        window-inherit-working-directory = false;
         working-directory = "home";
       };
     };

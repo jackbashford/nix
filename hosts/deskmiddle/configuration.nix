@@ -42,15 +42,9 @@
     };
   };
 
-  services.keyd = {
-    enable = false;
-    keyboards.default = {
-      settings = {
-        main = {
-          capslock = "overload(control, esc)";
-        };
-      };
-    };
+  fonts = {
+    packages = [ pkgs.fira-code ];
+    fontDir.enable = true;
   };
 
   environment.etc.nixos-current.source = inputs.self.outPath;
@@ -91,10 +85,6 @@
         i3status
       ];
     };
-    displayManager = {
-      lightdm.enable = true;
-      defaultSession = "none+i3";
-    };
     xrandrHeads = [
       {
         output = "DP-2";
@@ -106,7 +96,12 @@
     ];
   };
 
-  programs.sway.enable = false;
+  services.displayManager = {
+    sddm = {
+      enable = true;
+    };
+    defaultSession = "none+i3";
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -127,7 +122,7 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
