@@ -110,6 +110,10 @@
           {
             command = "--no-startup-id ${pkgs.xautolock}/bin/xautolock -time 5 -locker ${pkgs.i3lock}/bin/i3lock -c 000000";
           }
+          {
+            command = "${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1440 --rate 170.00 --output DP-0 --mode 2560x1440 --rate 165.00";
+            always = true;
+          }
         ];
       };
   };

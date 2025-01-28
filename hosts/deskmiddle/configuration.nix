@@ -92,6 +92,13 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
+  hardware.graphics.enable = true;
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true;
+  };
+
   services.xserver = {
     enable = true;
     windowManager.i3 = {
@@ -100,6 +107,7 @@
         i3status
       ];
     };
+    videoDrivers = [ "nvidia" ];
     xrandrHeads = [
       {
         output = "DP-2";
