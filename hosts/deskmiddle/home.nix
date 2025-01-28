@@ -22,8 +22,10 @@
 
     pkgs.nil
     pkgs.nixfmt-rfc-style
+    pkgs.cntr
 
     pkgs.discord
+    pkgs.spotify
 
     pkgs.gleam
     pkgs.erlang
@@ -137,8 +139,8 @@
         font-family = "Fira Code";
         confirm-close-surface = false;
         cursor-style = "bar";
-        gtk-single-instance = true;
         shell-integration-features = "no-cursor";
+        gtk-single-instance = true;
 
         gtk-titlebar = false;
         window-decoration = true;
@@ -172,6 +174,7 @@
       initExtra = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
+        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       '';
 
       shellAliases = {

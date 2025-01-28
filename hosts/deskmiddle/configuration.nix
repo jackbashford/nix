@@ -17,7 +17,6 @@
   ];
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
@@ -26,18 +25,34 @@
   # boot.loader.grub.useOSProber = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelModules = [ "uinput" ];
+  boot.kernelModules = [ "uinput" ];
 
-  # hardware.uinput.enable = true;
+  hardware.uinput.enable = true;
 
   services.kanata = {
     enable = true;
     keyboards.default = {
       extraDefCfg = "process-unmapped-keys yes";
       config = ''
-        (defsrc caps)
+        (defsrc caps g d h j k l)
 
-        (deflayer base esc)
+        (defalias
+          caps (tap-hold 150 200 esc lctl)
+          g (tap-hold 150 200 g lmet)
+          d (tap-hold 150 200 d (layer-while-held dlayer))
+        )
+
+        (deflayer base
+          @caps
+          @g
+          @d _ _ _ _
+        )
+
+        (deflayer dlayer
+          _
+          _
+          _ left down up right
+        )
       '';
     };
   };
@@ -112,7 +127,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
   services.cron = {
     enable = true;
