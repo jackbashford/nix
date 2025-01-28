@@ -174,7 +174,6 @@
       initExtra = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
-        source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       '';
 
       shellAliases = {
