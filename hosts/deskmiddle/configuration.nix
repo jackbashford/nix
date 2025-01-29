@@ -108,12 +108,7 @@
     };
   };
 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-    };
-    defaultSession = "none+i3";
-  };
+  services.displayManager.ly.enable = true;
 
   services.tailscale.enable = true;
 

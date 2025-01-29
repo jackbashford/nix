@@ -13,6 +13,8 @@
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
@@ -32,6 +34,7 @@
     pkgs.erlang
 
     pkgs.jetbrains.idea-community
+    pkgs.jetbrains-toolbox
   ];
 
   xsession.windowManager.i3 = {
@@ -184,13 +187,13 @@
       initExtra = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
-        export PATH=$PATH:$HOME/.local/bin
       '';
 
       shellAliases = {
         j = "zellij";
         ls = "lsd -1";
         cat = "bat";
+        fzhx = "hx $(fzf)";
       };
     };
 
