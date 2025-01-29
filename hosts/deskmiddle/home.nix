@@ -13,11 +13,12 @@
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 
   home.packages = [
+    pkgs.pulseaudio
     pkgs.ghostty
 
     pkgs.nil
@@ -86,6 +87,7 @@
             "${mod}+Shift+${up}" = "move up";
             "${mod}+Shift+${down}" = "move down";
             "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
+            "${mod}+s" = "exec ${pkgs.flameshot}/bin/flameshot gui -c";
           }
         );
         bars = [
@@ -104,6 +106,10 @@
           }
         ];
         startup = [
+          {
+            command = "${pkgs.flameshot}/bin/flameshot";
+            always = true;
+          }
           {
             command = "1password --silent";
           }
@@ -178,6 +184,7 @@
       initExtra = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
+        export PATH=$PATH:$HOME/.local/bin
       '';
 
       shellAliases = {
