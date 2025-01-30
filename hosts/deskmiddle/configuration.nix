@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
+    ../../modules/nixos
   ];
 
   catppuccin.flavor = "latte";
@@ -28,31 +29,12 @@
 
   hardware.uinput.enable = true;
 
-  services.kanata = {
-    enable = true;
-    keyboards.default = {
-      extraDefCfg = "process-unmapped-keys yes";
-      config = ''
-        (defsrc caps g d h j k l)
-
-        (defalias
-          caps (tap-hold 150 200 esc lctl)
-          g (tap-hold 150 200 g lmet)
-          d (tap-hold 150 200 d (layer-while-held dlayer))
-        )
-
-        (deflayer base
-          @caps
-          @g
-          @d _ _ _ _
-        )
-
-        (deflayer dlayer
-          _
-          _
-          _ left down up right
-        )
-      '';
+  j = {
+    keyboard = {
+      enable = true;
+      caps = true;
+      gmeta = true;
+      dlayer = true;
     };
   };
 
