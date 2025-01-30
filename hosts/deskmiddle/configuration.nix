@@ -36,7 +36,10 @@
       gmeta = true;
       dlayer = true;
     };
+    nvidia.enable = true;
   };
+
+  hardware.graphics.enable = true;
 
   fonts = {
     packages = [ pkgs.fira-code ];
@@ -62,13 +65,6 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  hardware.graphics.enable = true;
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-  };
-
   services.xserver = {
     enable = true;
     windowManager.i3 = {
@@ -77,7 +73,6 @@
         i3status
       ];
     };
-    videoDrivers = [ "nvidia" ];
     xrandrHeads = [
       {
         output = "DP-2";
