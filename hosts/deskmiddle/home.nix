@@ -24,6 +24,7 @@
     helix = {
       enable = true;
       defaultEditor = true;
+      masterBranch = true;
     };
     dev.nix = {
       enable = true;

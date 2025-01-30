@@ -13,12 +13,13 @@ in
     j.helix = {
       enable = lib.mkEnableOption "Enable the Helix editor";
       defaultEditor = lib.mkEnableOption "Use Helix as the default editor";
-      nix = lib.mkEnableOption "Add Nix editing support";
+      masterBranch = lib.mkEnableOption "Use the master branch as the source";
     };
   };
   config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
+      package = lib.mkDefault inputs.helix.packages.${pkgs.hostPlatform.system}.default;
       defaultEditor = cfg.defaultEditor;
       settings = {
         editor = {
