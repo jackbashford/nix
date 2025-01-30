@@ -35,6 +35,8 @@
   home.packages = [
     pkgs.pulseaudio
     pkgs.ghostty
+    pkgs.rofi
+    pkgs.flameshot
 
     pkgs.cntr
 
@@ -55,6 +57,7 @@
         mod = "Mod4";
         mod2 = "Mod1";
         term = "${pkgs.ghostty}/bin/ghostty";
+        menu = "${pkgs.rofi}/bin/rofi -show drun -no-lazy-grab";
         left = "h";
         right = "l";
         up = "k";
@@ -63,6 +66,7 @@
       {
         modifier = mod;
         terminal = term;
+        menu = menu;
         workspaceAutoBackAndForth = true;
         window.hideEdgeBorders = "both";
         keybindings = lib.mkOptionDefault (
@@ -100,8 +104,8 @@
             "${mod}+Shift+${right}" = "move right";
             "${mod}+Shift+${up}" = "move up";
             "${mod}+Shift+${down}" = "move down";
-            "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
             "${mod}+s" = "exec ${pkgs.flameshot}/bin/flameshot gui -c";
+            "${mod}+p" = "exec ${pkgs.flameshot}/bin/flameshot gui";
           }
         );
         bars = [
