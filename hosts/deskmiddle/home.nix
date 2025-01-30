@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
+    ../../modules/home-manager
   ];
 
   home.username = "jack";
@@ -19,12 +20,21 @@
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 
+  j = {
+    helix = {
+      enable = true;
+      defaultEditor = true;
+    };
+    dev.nix = {
+      enable = true;
+      helix = true;
+    };
+  };
+
   home.packages = [
     pkgs.pulseaudio
     pkgs.ghostty
 
-    pkgs.nil
-    pkgs.nixfmt-rfc-style
     pkgs.cntr
 
     pkgs.discord
@@ -190,57 +200,10 @@
       '';
 
       shellAliases = {
-        j = "zellij";
-        ls = "lsd -1";
-        cat = "bat";
-        fzhx = "hx $(fzf)";
-      };
-    };
-
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      settings = {
-        editor = {
-          line-number = "relative";
-          color-modes = true;
-          smart-tab.enable = false;
-          soft-wrap.enable = true;
-          cursor-shape = {
-            insert = "bar";
-            normal = "block";
-            select = "underline";
-          };
-          lsp.display-messages = true;
-        };
-
-        keys.normal = {
-          X = [
-            "extend_line_up"
-            "extend_to_line_bounds"
-          ];
-        };
-        keys.insert = {
-          C-h = "signature_help";
-        };
-      };
-      languages = {
-
-        language-server.nil.command = "${pkgs.nil}/bin/nil";
-
-        language = [
-          {
-            name = "nix";
-            auto-format = true;
-            file-types = [ "nix" ];
-            indent = {
-              tab-width = 2;
-              unit = "  ";
-            };
-            formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-            language-servers = [ "nil" ];
-          }
-        ];
+        j = "zellij"; # depends on zellij
+        ls = "lsd -1"; # depends on lsd
+        cat = "bat"; # depends on bat
+        fzhx = "hx $(fzf)"; # depends on helix and fzf
       };
     };
 

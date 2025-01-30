@@ -11,6 +11,9 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  catppuccin.flavor = "latte";
+  catppuccin.enable = true;
+
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
