@@ -7,8 +7,8 @@
 }:
 let
   cfg = config.j.keyboard;
-  tap-time = "100";
-  hold-time = "150";
+  tap-time = "150";
+  hold-time = "200";
 in
 {
   options.j.keyboard = {
