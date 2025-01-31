@@ -12,8 +12,8 @@
     ../../modules/nixos
   ];
 
-  catppuccin.flavor = "latte";
   catppuccin.enable = true;
+  catppuccin.flavor = "latte";
 
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
@@ -36,10 +36,11 @@
       gmeta = true;
       dlayer = true;
     };
-    nvidia.enable = true;
+    graphics = {
+      nvidia = true;
+      enable = true;
+    };
   };
-
-  hardware.graphics.enable = true;
 
   fonts = {
     packages = [ pkgs.fira-code ];

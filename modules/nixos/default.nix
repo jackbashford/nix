@@ -1,6 +1,6 @@
 {
   imports = [
     ./keyboard.nix
-    ./nvidia.nix
+    ./graphics.nix
   ];
 }
