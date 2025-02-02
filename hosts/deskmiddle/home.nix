@@ -51,6 +51,7 @@
 
     pkgs.discord
     pkgs.spotify
+    pkgs.chromium
 
     pkgs.gleam
     pkgs.erlang
