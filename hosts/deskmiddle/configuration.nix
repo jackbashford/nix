@@ -33,8 +33,8 @@
     keyboard = {
       enable = true;
       caps = true;
-      gmeta = true;
-      dlayer = true;
+      gmeta = false;
+      dlayer = false;
     };
     graphics = {
       nvidia = true;
@@ -106,7 +106,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
+    # pulse.enable = true;
   };
 
   users.users.jack = {
@@ -127,6 +127,7 @@
       vars = vars;
     };
     users.jack = import ./home.nix;
+    backupFileExtension = "hm-bak";
   };
 
   programs.firefox.enable = true;

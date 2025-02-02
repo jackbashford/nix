@@ -24,6 +24,20 @@ in
     };
   };
   config = {
+    home.packages = [
+      pkgs.ghostty
+      pkgs.rofi
+      pkgs.i3lock
+      pkgs.flameshot
+      pkgs.xautolock
+    ];
+
+    catppuccin.rofi.enable = false;
+
+    programs.rofi = lib.mkIf cfg.enable {
+      enable = true;
+      theme = "material";
+    };
 
     xsession.windowManager.i3 = lib.mkIf cfg.enable {
       enable = true;

@@ -162,7 +162,13 @@
       enableZshIntegration = true;
     };
     starship.enable = true;
-    tealdeer.enable = true;
+    tealdeer = {
+      enable = true;
+      settings = {
+        auto_update = true;
+        auto_update_interval_hours = 24;
+      };
+    };
     zellij.enable = true;
     zoxide.enable = true;
   };
