@@ -33,8 +33,8 @@
     keyboard = {
       enable = true;
       caps = true;
-      gmeta = false;
-      dlayer = false;
+      gmeta = true;
+      dlayer = true;
     };
     graphics = {
       nvidia = true;
@@ -106,7 +106,7 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    # pulse.enable = true;
+    pulse.enable = true;
   };
 
   users.users.jack = {
