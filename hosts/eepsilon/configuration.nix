@@ -60,21 +60,11 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # services.xserver = {
-  #   enable = true;
-  #   windowManager.i3 = {
-  #     enable = true;
-  #     extraPackages = with pkgs; [
-  #       i3status
-  #     ];
-  #   };
-  #   xkb = {
-  #     layout = "au";
-  #     variant = "";
-  #   };
-  # };
-
-  services.fprintd.enable = true;
+  services.fprintd = {
+    enable = true;
+    tod.enable = true;
+    tod.driver = pkgs.libfprint-2-tod1-goodix;
+  };
 
   programs.sway.enable = true;
 

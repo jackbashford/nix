@@ -14,13 +14,13 @@ in
     nvidia = lib.mkEnableOption "Enable NVIDIA drivers";
   };
 
-  config = {
-    hardware.graphics.enable = cfg.enable;
-    hardware.nvidia = lib.mkIf (cfg.enable && cfg.nvidia) {
+  config = lib.mkIf cfg.enable {
+    hardware.graphics.enable = true;
+    hardware.nvidia = lib.mkIf cfg.nvidia {
       modesetting.enable = true;
       nvidiaSettings = true;
     };
-    services.xserver.videoDrivers = [
+    services.xserver.videoDrivers = lib.mkIf cfg.nvidia [
       "nvidia"
     ];
   };

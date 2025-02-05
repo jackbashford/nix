@@ -30,9 +30,6 @@
       enable = true;
       helix = true;
     };
-    # i3 = {
-    # enable = true;
-    # };
   };
 
   home.packages = [
@@ -188,6 +185,7 @@
       enable = true;
       settings = {
         font-family = "Fira Code";
+        font-size = 14;
         confirm-close-surface = false;
         cursor-style = "bar";
         shell-integration-features = "no-cursor";
