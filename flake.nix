@@ -39,6 +39,21 @@
             }
           ];
         };
+        eepsilon = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            vars.user = "jack";
+          };
+          modules = [
+            ./hosts/eepsilon/configuration.nix
+            home-manager.nixosModules.home-manager
+            catppuccin.nixosModules.catppuccin
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+          ];
+        };
       };
     };
 }
