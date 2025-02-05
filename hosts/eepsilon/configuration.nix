@@ -62,9 +62,13 @@
 
   services.fprintd = {
     enable = true;
-    tod.enable = true;
-    tod.driver = pkgs.libfprint-2-tod1-goodix;
   };
+
+  services.printing.enable = true;
+  services.fwupd.enable = true;
+
+  # In case sway dies :3
+  services.xserver.desktopManager.plasma6.enable = true;
 
   programs.sway.enable = true;
 
@@ -128,6 +132,7 @@
     wget
     git
     htop
+    fprintd
   ];
 
   services.openssh.enable = true;
