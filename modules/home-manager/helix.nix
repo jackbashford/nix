@@ -41,6 +41,7 @@ in
               "extend_line_up"
               "extend_to_line_bounds"
             ];
+            A-j = "insert_newline";
           };
           insert = {
             C-h = "signature_help";

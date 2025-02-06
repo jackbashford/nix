@@ -16,7 +16,7 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  catppuccin.flavor = "latte";
+  catppuccin.flavor = "macchiato";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 
@@ -78,6 +78,7 @@
           Host *
               IdentityAgent ${onePassPath}
         '';
+        forwardAgent = true;
       };
 
     ghostty = {
@@ -162,7 +163,12 @@
       enableAliases = true;
       enableZshIntegration = true;
     };
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        nix_shell.disabled = true;
+      };
+    };
     tealdeer = {
       enable = true;
       settings = {

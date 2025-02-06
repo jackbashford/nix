@@ -13,7 +13,7 @@
   ];
 
   catppuccin.enable = true;
-  catppuccin.flavor = "latte";
+  catppuccin.flavor = "macchiato";
 
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
