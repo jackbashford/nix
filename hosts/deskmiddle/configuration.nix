@@ -149,6 +149,7 @@
     wget
     git
     htop
+    btop
   ];
 
   services.openssh.enable = true;

@@ -25,12 +25,17 @@ in
   };
   config = {
     home.packages = [
+      pkgs.dunst
       pkgs.ghostty
       pkgs.rofi
       pkgs.i3lock
       pkgs.flameshot
       pkgs.xautolock
     ];
+
+    services.dunst = {
+      enable = true;
+    };
 
     catppuccin.rofi.enable = false;
 
