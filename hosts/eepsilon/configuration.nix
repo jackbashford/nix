@@ -46,6 +46,7 @@
 
   environment.etc.nixos-current.source = inputs.self.outPath;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
 
   networking.hostName = "eepsilon";
   networking.networkmanager.enable = true;
@@ -76,16 +77,23 @@
   # In case sway dies :3
   services.desktopManager.plasma6.enable = false;
 
+  services.gnome.gnome-keyring.enable = true;
   programs.sway.enable = true;
+  programs.sway.wrapperFeatures.gtk = true;
 
   services.displayManager.ly.enable = true;
+
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.displayManager.sddm.package = pkgs.kdePackages.sddm;
+  # security.pam.services.sddm.enableGnomeKeyring = true;
 
   services.tailscale.enable = true;
 
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 * * * * jack cp $HOME/.zsh_history $HOME/.cache/zsh_history"
+      "0 * * * * jack cp $HOME/.zsh_history $HOME/.cache/zsh_history_git && git -C $HOME/.cache/zsh_history_git add . && git -C $HOME/.cache/zsh_history_git commit -m 'history backup'"
     ];
   };
 
@@ -142,7 +150,7 @@
     nerd-fonts.fira-code
     powertop
     power-profiles-daemon
-    jetbrains-toolbox
+    # jetbrains-toolbox
     javacc
     swaynotificationcenter
   ];

@@ -37,20 +37,17 @@
     pkgs.ghostty
     pkgs.rofi
     pkgs.flameshot
-    pkgs.kanshi
 
     pkgs.cntr
 
     pkgs.discord
     pkgs.spotify
     pkgs.chromium
-    pkgs.thunderbird
 
     pkgs.gleam
     pkgs.erlang
 
     pkgs.jetbrains.idea-community
-    pkgs.jetbrains.idea-ultimate
   ];
 
   home.pointerCursor = {
@@ -123,7 +120,7 @@
         ];
         startup = [
           {
-            command = "swaymsg output eDP-1 scale 1.2";
+            command = "swaymsg output eDP-1 scale 1.25";
             always = true;
           }
           {
@@ -162,19 +159,6 @@
         }
       ];
     };
-
-  # services.kanshi = {
-  #   enable = true;
-  #   profiles.fw-default = {
-  #     outputs = [
-  #       {
-  #         criteria = "eDP-1";
-  #         scale = 1.0;
-  #         status = "enable";
-  #       }
-  #     ];
-  #   };
-  # };
 
   programs = {
     git = {
@@ -250,6 +234,9 @@
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
+      config = {
+        hide_env_diff = true;
+      };
     };
 
     bat = {
@@ -285,8 +272,17 @@
         auto_update_interval_hours = 24;
       };
     };
-    zellij.enable = true;
+    tofi.enable = true;
+    zellij = {
+      enable = true;
+      enableZshIntegration = false;
+    };
     zoxide.enable = true;
+  };
+
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   home.stateVersion = "24.11";
