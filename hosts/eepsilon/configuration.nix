@@ -37,11 +37,15 @@
   };
 
   fonts = {
-    packages = [ pkgs.fira-code ];
+    packages = [
+      pkgs.fira-code
+      pkgs.nerd-fonts.fira-code
+    ];
     fontDir.enable = true;
   };
 
   environment.etc.nixos-current.source = inputs.self.outPath;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   networking.hostName = "eepsilon";
   networking.networkmanager.enable = true;
@@ -60,6 +64,8 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
+  services.power-profiles-daemon.enable = true;
+
   services.fprintd = {
     enable = true;
   };
@@ -68,7 +74,7 @@
   services.fwupd.enable = true;
 
   # In case sway dies :3
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = false;
 
   programs.sway.enable = true;
 
@@ -133,6 +139,12 @@
     git
     htop
     fprintd
+    nerd-fonts.fira-code
+    powertop
+    power-profiles-daemon
+    jetbrains-toolbox
+    javacc
+    swaynotificationcenter
   ];
 
   services.openssh.enable = true;

@@ -50,8 +50,15 @@
     pkgs.erlang
 
     pkgs.jetbrains.idea-community
-    pkgs.jetbrains-toolbox
+    pkgs.jetbrains.idea-ultimate
   ];
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.posy-cursors;
+    name = "Posy_Cursor_Black";
+    size = 22;
+  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -94,6 +101,9 @@
           // {
             "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
             "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
+            "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
+            "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
+            "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
           }
         );
         bars = [
@@ -118,6 +128,10 @@
           }
           {
             command = "1password --silent";
+          }
+          {
+            command = "swaync";
+            always = true;
           }
         ];
       };
@@ -185,7 +199,6 @@
       enable = true;
       settings = {
         font-family = "Fira Code";
-        font-size = 14;
         confirm-close-surface = false;
         cursor-style = "bar";
         shell-integration-features = "no-cursor";
