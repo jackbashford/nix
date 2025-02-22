@@ -21,6 +21,13 @@
 
     hardware.uinput.enable = true;
 
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+
+    services.blueman.enable = true;
+
     fonts = {
       packages = [
         pkgs.fira-code
@@ -86,6 +93,8 @@
       nerd-fonts.fira-code
       javacc
       devenv
+      digital
+      onlyoffice-desktopeditors
     ];
   };
 }

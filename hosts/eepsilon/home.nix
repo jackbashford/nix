@@ -70,6 +70,12 @@
         modifier = mod;
         terminal = term;
         menu = menu;
+        workspaceAutoBackAndForth = true;
+        input = {
+          "type:touchpad" = {
+            tap = "enabled";
+          };
+        };
         keybindings = lib.mkOptionDefault (
           # Remove the bad keybindings :p ...
           (builtins.listToAttrs (
@@ -89,7 +95,6 @@
                 "${mod}+Shift+Down"
                 "${mod}+a"
                 "${mod}+b"
-                "${mod}+s"
                 "${mod}+v"
                 "${mod}+w"
               ]
@@ -97,6 +102,7 @@
           # ... and add the good ones!
           // {
             "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
+            "${mod}+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\"";
             "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
             "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
             "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
@@ -194,6 +200,7 @@
 
         window-inherit-working-directory = false;
         working-directory = "home";
+        macos-option-as-alt = "left";
       };
     };
 
@@ -220,6 +227,8 @@
       initExtra = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
       '';
 
       shellAliases = {
@@ -280,10 +289,13 @@
     zoxide.enable = true;
   };
 
-  # home.sessionVariables = {
-  # NIXOS_OZONE_WL = "1";
-  # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-  # };
+  home.sessionVariables = {
+    # NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
+
+  };
 
   home.stateVersion = "24.11";
 

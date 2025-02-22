@@ -23,6 +23,8 @@
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
+  environment.sessionVariables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
   # environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
 
   networking.hostName = "eepsilon";
@@ -49,6 +51,9 @@
     ];
   };
 
+  # programs.ssh.setXAuthLocation = true;
+  # programs.ssh.forwardX11 = true;
+
   users.users."${vars.user}" = {
     isNormalUser = true;
     description = "Jack";
@@ -73,6 +78,8 @@
     powertop
     power-profiles-daemon
     swaynotificationcenter
+    # waypipe
+    # xorg.xauth
   ];
 
   system.stateVersion = "24.11";
