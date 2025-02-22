@@ -94,7 +94,6 @@
       javacc
       devenv
       digital
-      onlyoffice-desktopeditors
     ];
   };
 }
