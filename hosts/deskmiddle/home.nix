@@ -59,6 +59,7 @@
 
     pkgs.jetbrains.idea-community
     pkgs.jetbrains-toolbox
+    pkgs.digital
   ];
 
   programs = {
@@ -76,7 +77,7 @@
         enable = true;
         extraConfig = ''
           Host *
-              IdentityAgent ${onePassPath}
+          IdentityAgent ${onePassPath}
         '';
         forwardAgent = true;
       };
@@ -176,7 +177,10 @@
         auto_update_interval_hours = 24;
       };
     };
-    zellij.enable = true;
+    zellij = {
+      enable = true;
+      enableZshIntegration = false;
+    };
     zoxide.enable = true;
   };
 
