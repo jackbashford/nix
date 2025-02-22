@@ -188,14 +188,15 @@
     ghostty = {
       enable = true;
       settings = {
-        font-family = "Fira Code";
+        font-family = "FiraCode Nerd Font";
+        font-feature = "ss09";
         confirm-close-surface = false;
         cursor-style = "bar";
         shell-integration-features = "no-cursor";
         gtk-single-instance = true;
 
         gtk-titlebar = false;
-        window-decoration = true;
+        window-decoration = false;
         window-theme = "ghostty";
 
         window-inherit-working-directory = false;
