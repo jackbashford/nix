@@ -6,6 +6,20 @@
   ...
 }:
 {
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+    config = {
+      hide_env_diff = true;
+    };
+  };
+
   programs.ghostty.settings = {
     custom-shader = "ghostty-shaders/underwater.glsl";
     gtk-adwaita = false;
