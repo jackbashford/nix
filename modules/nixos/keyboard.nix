@@ -30,7 +30,7 @@ in
         )
 
         (defalias
-          ${lib.optionalString cfg.caps "caps (tap-hold ${tap-time} ${hold-time} esc lctl)"}
+          ${lib.optionalString cfg.caps "caps (tap-hold 100 150 esc lctl)"}
           ${lib.optionalString cfg.gmeta "g (tap-hold ${tap-time} ${hold-time} g lmet)"}
           ${lib.optionalString cfg.dlayer "d (tap-hold  ${tap-time} ${hold-time} d (layer-while-held dlayer))"}
         )

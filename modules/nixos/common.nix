@@ -9,7 +9,7 @@
 {
   config = {
     catppuccin.enable = true;
-    catppuccin.flavor = "macchiato";
+    catppuccin.flavor = "latte";
 
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub.enable = true;
@@ -20,13 +20,6 @@
     boot.kernelModules = [ "uinput" ];
 
     hardware.uinput.enable = true;
-
-    hardware.bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
-    services.blueman.enable = true;
 
     fonts = {
       packages = [
@@ -58,6 +51,8 @@
     services.displayManager.ly.enable = true;
     services.tailscale.enable = true;
     services.openssh.enable = true;
+
+    services.globalprotect.enable = true;
 
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
@@ -91,9 +86,12 @@
       htop
       btop
       nerd-fonts.fira-code
-      javacc
       devenv
       digital
+
+      globalprotect-openconnect
+      polkit_gnome
+      networkmanagerapplet
     ];
   };
 }
