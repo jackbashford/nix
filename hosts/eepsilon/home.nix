@@ -203,6 +203,7 @@
         window-inherit-working-directory = false;
         working-directory = "home";
         macos-option-as-alt = "left";
+        custom-shader = null;
       };
     };
 
