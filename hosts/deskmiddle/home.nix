@@ -52,10 +52,6 @@
     pkgs.discord
     pkgs.spotify
     pkgs.chromium
-    pkgs.thunderbird
-
-    pkgs.gleam
-    pkgs.erlang
 
     pkgs.jetbrains.idea-community
     pkgs.jetbrains-toolbox
