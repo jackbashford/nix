@@ -14,8 +14,6 @@
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
-
   catppuccin.flavor = "macchiato";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
@@ -52,10 +50,6 @@
     pkgs.discord
     pkgs.spotify
     pkgs.chromium
-    pkgs.thunderbird
-
-    pkgs.gleam
-    pkgs.erlang
 
     pkgs.jetbrains.idea-community
     pkgs.jetbrains-toolbox
