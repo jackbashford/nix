@@ -6,6 +6,39 @@
   ...
 }:
 {
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
+  catppuccin.enable = true;
+  catppuccin.zsh-syntax-highlighting.enable = false;
+
+  j = {
+    helix = {
+      enable = true;
+      defaultEditor = true;
+      masterBranch = true;
+    };
+    dev.nix = {
+      enable = true;
+      helix = true;
+    };
+  };
+
+  home.packages = [
+    pkgs.pulseaudio
+    pkgs.ghostty
+    pkgs.flameshot
+
+    pkgs.cntr
+    pkgs.delta
+
+    pkgs.discord
+    pkgs.spotify
+    pkgs.chromium
+
+    pkgs.jetbrains.idea-community
+    pkgs.digital
+  ];
+
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;

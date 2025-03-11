@@ -14,8 +14,6 @@
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
-
   catppuccin.flavor = "macchiato";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
