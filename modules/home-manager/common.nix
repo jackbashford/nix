@@ -66,6 +66,13 @@
     gtk-adwaita = false;
   };
 
+  programs.git.delta = {
+    enable = true;
+    options = {
+      line-numbers = true;
+    };
+  };
+
   gtk.gtk3.extraCss = ''
     .window-frame {
         box-shadow: 0 0 0 0;

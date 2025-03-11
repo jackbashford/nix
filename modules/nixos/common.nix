@@ -9,7 +9,7 @@
 {
   config = {
     catppuccin.enable = true;
-    catppuccin.flavor = "latte";
+    catppuccin.flavor = "macchiato";
 
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub.enable = true;

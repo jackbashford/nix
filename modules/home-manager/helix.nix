@@ -28,7 +28,7 @@ in
           smart-tab.enable = false;
           soft-wrap.enable = true;
           cursor-shape = {
-            insert = "bar";
+            insert = "block";
             normal = "block";
             select = "underline";
           };
