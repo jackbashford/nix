@@ -19,6 +19,7 @@ in
     hardware.nvidia = lib.mkIf cfg.nvidia {
       modesetting.enable = true;
       nvidiaSettings = true;
+      open = true;
     };
     services.xserver.videoDrivers = lib.mkIf cfg.nvidia [
       "nvidia"
