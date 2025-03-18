@@ -84,7 +84,6 @@ in
                   "${mod}+b"
                   "${mod}+s"
                   "${mod}+v"
-                  "${mod}+w"
                 ]
             ))
             # ... and add the good ones!

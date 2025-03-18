@@ -34,6 +34,7 @@ in
           };
           lsp.display-messages = true;
           search.smart-case = false;
+          bufferline = "multiple";
         };
 
         keys = {
