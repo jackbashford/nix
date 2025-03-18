@@ -43,6 +43,7 @@ in
               "extend_to_line_bounds"
             ];
             A-j = "insert_newline";
+            ret = "goto_word";
           };
           insert = {
             C-h = "signature_help";

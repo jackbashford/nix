@@ -130,6 +130,14 @@
             };
             statusCommand = "while date +'%Y-%m-%d %X'; do sleep 1; done";
           }
+          # {
+          #   position = "top";
+          #   colors = {
+          #     statusline = "#ffffff";
+          #     background = "#323232";
+          #   };
+          #   statusCommand = "nix-shell -p acpi --run acpi";
+          # }
         ];
         startup = [
           {

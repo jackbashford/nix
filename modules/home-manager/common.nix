@@ -36,6 +36,9 @@
     pkgs.chromium
 
     pkgs.jetbrains.idea-community
+    pkgs.jetbrains.idea-ultimate
+    pkgs.jdk23
+    pkgs.python39Full
     pkgs.digital
   ];
 

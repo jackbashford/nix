@@ -25,6 +25,7 @@
       packages = [
         pkgs.fira-code
         pkgs.nerd-fonts.fira-code
+        pkgs.vistafonts
       ];
       fontDir.enable = true;
     };
@@ -73,6 +74,11 @@
       polkitPolicyOwners = [ vars.user ];
     };
 
+    programs.java = {
+      enable = true;
+      package = pkgs.jdk23;
+    };
+
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [
       "nix-command"
@@ -88,10 +94,20 @@
       nerd-fonts.fira-code
       devenv
       digital
+      gcc
+      clang-manpages
 
       globalprotect-openconnect
       polkit_gnome
       networkmanagerapplet
     ];
+
+    documentation = {
+      enable = true;
+      dev.enable = true;
+      doc.enable = true;
+      man.enable = true;
+      info.enable = true;
+    };
   };
 }
