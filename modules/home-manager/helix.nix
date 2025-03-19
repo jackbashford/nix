@@ -45,6 +45,8 @@ in
             ];
             A-j = "insert_newline";
             ret = "goto_word";
+            C-h = "goto_previous_buffer";
+            C-l = "goto_next_buffer";
           };
           insert = {
             C-h = "signature_help";
