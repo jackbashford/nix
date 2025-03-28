@@ -59,7 +59,7 @@
   programs.git.delta = {
     enable = true;
     options = {
-      dark = true;
+      # dark = fals;
       line-numbers = true;
     };
   };

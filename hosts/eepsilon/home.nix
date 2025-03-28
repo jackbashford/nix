@@ -16,7 +16,7 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 

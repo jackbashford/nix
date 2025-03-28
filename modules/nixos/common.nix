@@ -9,7 +9,7 @@
 {
   config = {
     catppuccin.enable = true;
-    catppuccin.flavor = "macchiato";
+    catppuccin.flavor = "latte";
 
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub.enable = true;
@@ -49,6 +49,13 @@
     };
 
     services.printing.enable = true;
+
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
     services.displayManager.ly.enable = true;
     services.tailscale.enable = true;
     services.openssh.enable = true;
