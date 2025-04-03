@@ -26,17 +26,11 @@
   home.packages = [
     pkgs.pulseaudio
     pkgs.ghostty
-    pkgs.flameshot
 
     pkgs.cntr
     pkgs.delta
 
-    pkgs.discord
-    pkgs.spotify
-    pkgs.chromium
-
     pkgs.jetbrains.idea-community
-    pkgs.jetbrains.idea-ultimate
     pkgs.jdk23
     pkgs.python39Full
     pkgs.digital

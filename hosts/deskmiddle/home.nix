@@ -52,7 +52,6 @@
     pkgs.chromium
 
     pkgs.jetbrains.idea-community
-    pkgs.jetbrains-toolbox
     pkgs.digital
   ];
 

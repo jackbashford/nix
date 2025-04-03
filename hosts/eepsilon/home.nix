@@ -40,13 +40,6 @@
 
     pkgs.cntr
 
-    pkgs.discord
-    pkgs.spotify
-    pkgs.chromium
-
-    pkgs.gleam
-    pkgs.erlang
-
     pkgs.jetbrains.idea-community
     pkgs.onlyoffice-desktopeditors
   ];
