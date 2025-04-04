@@ -59,7 +59,6 @@
   };
 
   programs.ghostty.settings = {
-    custom-shader = "ghostty-shaders/underwater.glsl";
     gtk-adwaita = false;
   };
 

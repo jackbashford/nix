@@ -91,6 +91,7 @@
 
         window-inherit-working-directory = false;
         working-directory = "home";
+        custom-shader = null;
       };
     };
 
