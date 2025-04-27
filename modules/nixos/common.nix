@@ -9,7 +9,7 @@
 {
   config = {
     catppuccin.enable = true;
-    catppuccin.flavor = "latte";
+    catppuccin.flavor = vars.flavor;
 
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub.enable = true;
@@ -87,6 +87,10 @@
     };
 
     nixpkgs.config.allowUnfree = true;
+    nix.settings.trusted-users = [
+      "root"
+      vars.user
+    ];
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -103,11 +107,26 @@
       digital
       gcc
       clang-manpages
+      openocd
+      gnumake
+      zip
+      unzip
 
       globalprotect-openconnect
       polkit_gnome
       networkmanagerapplet
+      vlc
     ];
+
+    # environment.etc.udev."rules.d"."60-openocd.rules".source =
+    #   "${pkgs.openocd}/etc/udev/rules.d/60-openocd.rules";
+
+    # services.udev.extraRules = ''
+    #   ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="664"
+    #   KERNEL=="hidraw*", ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="664"
+    # '';
+
+    services.udev.packages = with pkgs; [ openocd ];
 
     documentation = {
       enable = true;

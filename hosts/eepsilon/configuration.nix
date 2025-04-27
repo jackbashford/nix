@@ -44,6 +44,11 @@
   programs.sway.enable = true;
   # programs.sway.wrapperFeatures.gtk = true;
 
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = [ ];
+  # };
+
   services.cron = {
     enable = true;
     systemCronJobs = [
@@ -60,6 +65,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "plugdev"
     ];
     shell = pkgs.zsh;
   };
@@ -78,6 +84,7 @@
     powertop
     power-profiles-daemon
     swaynotificationcenter
+    chromium
     # waypipe
     # xorg.xauth
   ];

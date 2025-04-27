@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   lib,
+  vars,
   ...
 }:
 {
@@ -16,9 +17,12 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  catppuccin.flavor = "latte";
+  catppuccin.flavor = vars.flavor;
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
+  catppuccin.fzf.enable = true;
+  catppuccin.fzf.flavor = vars.flavor;
+  catppuccin.fzf.accent = "pink";
 
   j = {
     helix = {
@@ -42,6 +46,7 @@
 
     pkgs.jetbrains.idea-community
     pkgs.onlyoffice-desktopeditors
+    pkgs.vscodium
   ];
 
   home.pointerCursor = {

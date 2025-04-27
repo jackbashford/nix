@@ -22,12 +22,12 @@
       ...
     }@inputs:
     {
-
       nixosConfigurations = {
         deskmiddle = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
             vars.user = "jack";
+            vars.flavor = "mocha";
           };
           modules = [
             ./hosts/deskmiddle/configuration.nix
@@ -43,6 +43,7 @@
           specialArgs = {
             inherit inputs;
             vars.user = "jack";
+            vars.flavor = "mocha";
           };
           modules = [
             ./hosts/eepsilon/configuration.nix
