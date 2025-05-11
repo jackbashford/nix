@@ -288,10 +288,6 @@
       };
     };
     tofi.enable = true;
-    zellij = {
-      enable = true;
-      enableZshIntegration = false;
-    };
     zoxide.enable = true;
   };
 

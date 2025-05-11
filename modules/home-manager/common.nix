@@ -41,6 +41,15 @@
     enableZshIntegration = true;
   };
 
+  programs.zellij = {
+    enable = true;
+    enableZshIntegration = false;
+    settings = {
+      default_layout = "compact";
+      show_startup_tips = false;
+    };
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

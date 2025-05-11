@@ -166,10 +166,6 @@
         auto_update_interval_hours = 24;
       };
     };
-    zellij = {
-      enable = true;
-      enableZshIntegration = false;
-    };
     zoxide.enable = true;
   };
 
