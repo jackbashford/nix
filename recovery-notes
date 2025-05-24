@@ -1,0 +1,4 @@
+Fixed desktop by:
+0. Setup chroot environment by mounting /, /home, /boot normally, and /proc, /sys, /dev with -o bind, then chrooting with activate and bin/bash as per nixos wiki page.
+1. Copying /etc/resolv.conf to the chroot
+2. Running nixos-rebuild boot --flake <flake path> --option sandbox false
