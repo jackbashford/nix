@@ -45,6 +45,8 @@
     pkgs.jdk23
     pkgs.python39Full
     pkgs.digital
+
+    pkgs.clang
   ];
 
   programs.yazi = {
