@@ -17,9 +17,20 @@
       defaultEditor = true;
       masterBranch = true;
     };
-    dev.nix = {
-      enable = true;
-      helix = true;
+    dev = {
+      nix = {
+        enable = true;
+        helix = true;
+      };
+      typst = {
+        enable = true;
+        helix = true;
+      };
+      markdown.enable = true;
+      c = {
+        enable = true;
+        helix = true;
+      };
     };
   };
 

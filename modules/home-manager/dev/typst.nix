@@ -15,14 +15,14 @@ in
       helix = lib.mkEnableOption "Add Helix configuration";
     };
   };
-  config = lib.mkIf cfg.dev.nix.enable {
+  config = lib.mkIf cfg.dev.typst.enable {
     home.packages = [
       pkgs.typst
       pkgs.tinymist
       pkgs.typstyle
     ];
 
-    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.nix.helix) {
+    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.typst.helix) {
       language-server.tinymist = {
         command = "${pkgs.tinymist}/bin/tinymist";
         config = {

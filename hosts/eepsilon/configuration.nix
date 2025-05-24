@@ -85,6 +85,7 @@
     power-profiles-daemon
     swaynotificationcenter
     chromium
+    acpi
     # waypipe
     # xorg.xauth
   ];

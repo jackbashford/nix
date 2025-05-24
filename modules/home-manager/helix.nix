@@ -35,6 +35,8 @@ in
           lsp.display-messages = true;
           search.smart-case = false;
           bufferline = "multiple";
+          jump-label-alphabet = "ghfjdksla;tyvbrucneixmwoz";
+          inline-diagnostics.cursor-line = "warning";
         };
 
         keys = {

@@ -161,13 +161,13 @@
     {
       enable = true;
       timeouts = [
+        # {
+        #   timeout = 300;
+        #   command = "${swaylock} -f -c 000000";
+        # }
         {
           timeout = 300;
-          command = "${swaylock} -f -c 000000";
-        }
-        {
-          timeout = 600;
-          command = "${swaymsg} \"output * power off\"";
+          command = "${swaylock} -f -c 000000 && ${swaymsg} \"output * power off\"";
           resumeCommand = "${swaymsg} \"output * power on\"";
         }
       ];
