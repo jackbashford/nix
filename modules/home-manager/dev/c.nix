@@ -18,6 +18,7 @@ in
   config = lib.mkIf cfg.dev.c.enable {
     home.packages = [
       pkgs.clang-tools
+      pkgs.gf
     ];
 
     programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.c.helix) {

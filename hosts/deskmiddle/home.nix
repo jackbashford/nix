@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     ../../modules/home-manager
   ];
 
@@ -115,7 +115,7 @@
         size = 1000000;
       };
 
-      initExtra = ''
+      initContent = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
       '';

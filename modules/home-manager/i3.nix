@@ -61,7 +61,6 @@ in
           modifier = mod;
           terminal = term;
           menu = menu;
-          workspaceAutoBackAndForth = true;
           window.hideEdgeBorders = "both";
           keybindings = lib.mkOptionDefault (
             # Remove the bad keybindings :p ...

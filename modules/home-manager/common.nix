@@ -31,6 +31,10 @@
         enable = true;
         helix = true;
       };
+      python = {
+        enable = true;
+        helix = true;
+      };
     };
   };
 
@@ -43,7 +47,7 @@
 
     pkgs.jetbrains.idea-community
     pkgs.jdk23
-    pkgs.python39Full
+    pkgs.python311Full
     pkgs.digital
 
     pkgs.clang
