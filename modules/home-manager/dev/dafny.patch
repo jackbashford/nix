@@ -1,0 +1,16 @@
+diff --git a/pkgs/by-name/da/dafny/package.nix b/pkgs/by-name/da/dafny/package.nix
+index 9484b7aad..e8dd6e751 100644
+--- a/pkgs/by-name/da/dafny/package.nix
++++ b/pkgs/by-name/da/dafny/package.nix
+@@ -66,6 +66,10 @@ buildDotnetModule rec {
+       substituteInPlace Source/DafnyRuntime/DafnyRuntime.csproj \
+         --replace-fail TargetFrameworks TargetFramework \
+         --replace-fail "netstandard2.0;net452" net8.0
++
++      substituteInPlace Source/DafnyLanguageServer/DafnyLanguageServer.cs \
++        --replace-fail "DafnyVersion)" "new[] { DafnyVersion })"
++
+     '';
+ 
+   dotnet-sdk = dotnetCorePackages.sdk_8_0;
+
