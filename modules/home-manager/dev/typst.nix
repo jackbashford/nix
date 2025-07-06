@@ -10,19 +10,16 @@ let
 in
 {
   options = {
-    j.dev.typst = {
-      enable = lib.mkEnableOption "Add Typst editing support";
-      helix = lib.mkEnableOption "Add Helix configuration";
-    };
+    j.dev.typst = lib.mkEnableOption "Add Typst editing support";
   };
-  config = lib.mkIf cfg.dev.typst.enable {
+  config = lib.mkIf cfg.dev.typst {
     home.packages = [
       pkgs.typst
       pkgs.tinymist
       pkgs.typstyle
     ];
 
-    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.typst.helix) {
+    programs.helix.languages = lib.mkIf cfg.helix.enable {
       language-server.tinymist = {
         command = "${pkgs.tinymist}/bin/tinymist";
         config = {

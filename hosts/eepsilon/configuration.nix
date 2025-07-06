@@ -3,6 +3,7 @@
   inputs,
   vars,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -11,6 +12,12 @@
     inputs.home-manager.nixosModules.home-manager
     ../../modules/nixos
   ];
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "vscode"
+    ];
 
   j = {
     keyboard = {
@@ -34,6 +41,12 @@
   services.fprintd = {
     enable = true;
   };
+
+  hardware.bluetooth = {
+    enable = false;
+    powerOnBoot = true;
+  };
+  services.blueman.enable = true;
 
   services.fwupd.enable = true;
 
@@ -61,11 +74,12 @@
 
   users.users."${vars.user}" = {
     isNormalUser = true;
-    description = "Jack";
+    description = "${vars.user}";
     extraGroups = [
       "networkmanager"
       "wheel"
       "plugdev"
+      "docker"
     ];
     shell = pkgs.zsh;
   };
@@ -86,9 +100,20 @@
     swaynotificationcenter
     chromium
     acpi
+    vscode
     # waypipe
     # xorg.xauth
   ];
+
+  services.logind = {
+    powerKey = "sleep";
+    powerKeyLongPress = "poweroff";
+    lidSwitch = "sleep";
+  };
+
+  virtualisation.docker = {
+    enable = true;
+  };
 
   system.stateVersion = "24.11";
 }

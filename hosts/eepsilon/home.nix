@@ -8,7 +8,7 @@
 }:
 {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     ../../modules/home-manager
   ];
 
@@ -24,40 +24,34 @@
   catppuccin.fzf.flavor = vars.flavor;
   catppuccin.fzf.accent = "pink";
 
-  j = {
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      masterBranch = true;
-    };
-    dev.nix = {
-      enable = true;
-      helix = true;
-    };
-  };
+  home.packages = with pkgs; [
+    pulseaudio
+    ghostty
+    rofi
+    flameshot
 
-  home.packages = [
-    pkgs.pulseaudio
-    pkgs.ghostty
-    pkgs.rofi
-    pkgs.flameshot
+    cntr
 
-    pkgs.cntr
+    jetbrains.idea-community
+    onlyoffice-desktopeditors
+    vscodium
 
-    pkgs.jetbrains.idea-community
-    pkgs.onlyoffice-desktopeditors
-    pkgs.vscodium
+    font-awesome
+    noto-fonts-emoji
+
+    obs-studio
   ];
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.posy-cursors;
-    name = "Posy_Cursor_Black";
-    size = 22;
-  };
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   # package = pkgs.posy-cursors;
+  #   name = "Posy_Cursor_Black";
+  #   size = 22;
+  # };
 
   wayland.windowManager.sway = {
     enable = true;
+    checkConfig = false;
     config =
       let
         mod = "Mod4";
@@ -69,12 +63,13 @@
         modifier = mod;
         terminal = term;
         menu = menu;
-        workspaceAutoBackAndForth = true;
         input = {
           "type:touchpad" = {
             tap = "enabled";
           };
         };
+        focus.followMouse = false;
+        workspaceAutoBackAndForth = true;
         keybindings = lib.mkOptionDefault (
           # Remove the bad keybindings :p ...
           (builtins.listToAttrs (
@@ -112,9 +107,14 @@
             "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
             "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
             "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+            "XF86AudioMedia" = "exec ${pkgs.sway}/bin/swaymsg output \"eDP-1\" power toggle";
           }
         );
         bars = [
+          # {
+          #   position = "top";
+          #   command = "waybar";
+          # }
           {
             position = "top";
             colors = {
@@ -134,7 +134,7 @@
           #     statusline = "#ffffff";
           #     background = "#323232";
           #   };
-          #   statusCommand = "nix-shell -p acpi --run acpi";
+          #   statusCommand = "while acpi; do sleep 60; done";
           # }
         ];
         startup = [
@@ -151,6 +151,9 @@
           }
         ];
       };
+    extraConfig = ''
+      output "*" bg /home/${vars.user}/.background-image fill
+    '';
   };
 
   services.swayidle =
@@ -174,6 +177,10 @@
       events = [
         {
           event = "before-sleep";
+          command = "${swaylock} -f -c 000000";
+        }
+        {
+          event = "lock";
           command = "${swaylock} -f -c 000000";
         }
       ];
@@ -202,7 +209,8 @@
       enable = true;
       settings = {
         font-family = "FiraCode Nerd Font";
-        font-feature = "ss09";
+        # font-feature = "ss09";
+        font-size = 11;
         confirm-close-surface = false;
         cursor-style = "bar";
         shell-integration-features = "no-cursor";
@@ -239,7 +247,7 @@
         size = 1000000;
       };
 
-      initExtra = ''
+      initContent = ''
         setopt INC_APPEND_HISTORY
         bindkey "^[[3~" delete-char
         bindkey "^[[1;5C" forward-word
@@ -248,7 +256,7 @@
 
       shellAliases = {
         j = "zellij"; # depends on zellij
-        ls = "lsd -1"; # depends on lsd
+        # ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
       };
@@ -288,6 +296,7 @@
       };
     };
     tofi.enable = true;
+    waybar.enable = true;
     zoxide.enable = true;
   };
 

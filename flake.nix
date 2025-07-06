@@ -49,10 +49,10 @@
             ./hosts/eepsilon/configuration.nix
             home-manager.nixosModules.home-manager
             catppuccin.nixosModules.catppuccin
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
+            # {
+            # home-manager.useGlobalPkgs = true;
+            # home-manager.useUserPackages = true;
+            # }
           ];
         };
       };

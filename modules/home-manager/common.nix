@@ -18,23 +18,14 @@
       masterBranch = true;
     };
     dev = {
-      nix = {
-        enable = true;
-        helix = true;
-      };
-      typst = {
-        enable = true;
-        helix = true;
-      };
-      markdown.enable = true;
-      c = {
-        enable = true;
-        helix = true;
-      };
-      python = {
-        enable = true;
-        helix = true;
-      };
+      c = true;
+      dafny = true;
+      haskell = true;
+      markdown = true;
+      nix = true;
+      python = true;
+      ts = true;
+      typst = true;
     };
   };
 
@@ -51,6 +42,7 @@
     pkgs.digital
 
     pkgs.clang
+    pkgs.comma
   ];
 
   programs.yazi = {
@@ -64,6 +56,10 @@
     settings = {
       default_layout = "compact";
       show_startup_tips = false;
+      simplified_ui = true;
+      show_release_notes = false;
+      pane_frames = false;
+      ui.pane_frames.hide_session_name = true;
     };
   };
 

@@ -10,11 +10,9 @@ let
 in
 {
   options = {
-    j.dev.markdown = {
-      enable = lib.mkEnableOption "Add Markdown LSP support";
-    };
+    j.dev.markdown = lib.mkEnableOption "Add Markdown LSP support";
   };
-  config = lib.mkIf cfg.dev.typst.enable {
+  config = lib.mkIf cfg.dev.markdown {
     home.packages = [
       pkgs.marksman
     ];

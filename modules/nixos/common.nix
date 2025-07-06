@@ -105,7 +105,7 @@
       nerd-fonts.fira-code
       devenv
       digital
-      gcc
+      # gcc
       clang-manpages
       openocd
       gnumake
@@ -145,6 +145,11 @@
     programs.nix-ld = {
       enable = true;
       libraries = [ pkgs.stdenv.cc.cc ];
+    };
+
+    virtualisation = {
+      containers.enable = true;
+      podman.enable = true;
     };
   };
 }

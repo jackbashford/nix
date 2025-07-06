@@ -79,7 +79,7 @@
       enable = true;
       settings = {
         font-family = "FiraCode Nerd Font";
-        font-feature = "ss09";
+        # font-feature = "ss09";
         confirm-close-surface = false;
         cursor-style = "bar";
         shell-integration-features = "no-cursor";

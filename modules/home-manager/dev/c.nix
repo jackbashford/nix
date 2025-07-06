@@ -10,18 +10,16 @@ let
 in
 {
   options = {
-    j.dev.c = {
-      enable = lib.mkEnableOption "Add C language support";
-      helix = lib.mkEnableOption "Add Helix configuration";
-    };
+    j.dev.c = lib.mkEnableOption "Add C language support";
   };
-  config = lib.mkIf cfg.dev.c.enable {
+  config = lib.mkIf cfg.dev.c {
     home.packages = [
+      (pkgs.hiPrio pkgs.gcc)
       pkgs.clang-tools
       pkgs.gf
     ];
 
-    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.c.helix) {
+    programs.helix.languages = lib.mkIf cfg.helix.enable {
       language = [
         {
           name = "c";

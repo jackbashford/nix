@@ -10,18 +10,15 @@ let
 in
 {
   options = {
-    j.dev.nix = {
-      enable = lib.mkEnableOption "Add Nix editing support";
-      helix = lib.mkEnableOption "Add Helix configuration";
-    };
+    j.dev.nix = lib.mkEnableOption "Add Nix editing support";
   };
-  config = lib.mkIf cfg.dev.nix.enable {
+  config = lib.mkIf cfg.dev.nix {
     home.packages = [
       pkgs.nil
       pkgs.nixfmt-rfc-style
     ];
 
-    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.nix.helix) {
+    programs.helix.languages = lib.mkIf cfg.helix.enable {
       language-server.nil.command = "${pkgs.nil}/bin/nil";
 
       language = [

@@ -10,18 +10,15 @@ let
 in
 {
   options = {
-    j.dev.python = {
-      enable = lib.mkEnableOption "Add Python language support";
-      helix = lib.mkEnableOption "Add Helix configuration";
-    };
+    j.dev.python = lib.mkEnableOption "Add Python language support";
   };
-  config = lib.mkIf cfg.dev.python.enable {
+  config = lib.mkIf cfg.dev.python {
     home.packages = [
       pkgs.python312Packages.python-lsp-server
       pkgs.ruff
     ];
 
-    programs.helix.languages = lib.mkIf (cfg.helix.enable && cfg.dev.python.helix) {
+    programs.helix.languages = lib.mkIf cfg.helix.enable {
       language-server.ruff = {
         command = "${pkgs.ruff}/bin/ruff";
         args = [ "server" ];
