@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   lib,
+  vars,
   ...
 }:
 {
@@ -14,7 +15,7 @@
   home.username = "jack";
   home.homeDirectory = "/home/jack";
 
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = vars.flavor;
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 
@@ -122,7 +123,7 @@
 
       shellAliases = {
         j = "zellij"; # depends on zellij
-        ls = "lsd -1"; # depends on lsd
+        # ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
       };

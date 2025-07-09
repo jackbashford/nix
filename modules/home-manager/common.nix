@@ -29,20 +29,20 @@
     };
   };
 
-  home.packages = [
-    pkgs.pulseaudio
-    pkgs.ghostty
+  home.packages = with pkgs; [
+    pulseaudio
+    ghostty
 
-    pkgs.cntr
-    pkgs.delta
+    cntr
+    delta
 
-    pkgs.jetbrains.idea-community
-    pkgs.jdk23
-    pkgs.python311Full
-    pkgs.digital
+    jetbrains.idea-community
+    jdk23
+    python311Full
+    digital
 
-    pkgs.clang
-    pkgs.comma
+    clang
+    comma
   ];
 
   programs.yazi = {
