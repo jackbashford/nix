@@ -49,6 +49,12 @@ in
             ret = "goto_word";
             C-h = "goto_previous_buffer";
             C-l = "goto_next_buffer";
+            space = {
+              W = [
+                ":lang text"
+                ":write"
+              ];
+            };
           };
           insert = {
             C-h = "signature_help";

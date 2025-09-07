@@ -7,6 +7,8 @@
   ...
 }:
 {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     inputs.catppuccin.homeModules.catppuccin
     ../../modules/home-manager
@@ -40,14 +42,20 @@
     noto-fonts-emoji
 
     obs-studio
+    kdePackages.okular
+    zathura
+    wl-clipboard
+    hledger
   ];
 
   # home.pointerCursor = {
   #   gtk.enable = true;
-  #   # package = pkgs.posy-cursors;
+  #   package = pkgs.posy-cursors;
   #   name = "Posy_Cursor_Black";
   #   size = 22;
   # };
+
+  programs.wofi.enable = true;
 
   wayland.windowManager.sway = {
     enable = true;
@@ -57,7 +65,7 @@
         mod = "Mod4";
         mod2 = "Mod1";
         term = "${pkgs.ghostty}/bin/ghostty";
-        menu = "${pkgs.wmenu}/bin/wmenu-run";
+        menu = "${pkgs.wofi}/bin/wofi --show drun";
       in
       {
         modifier = mod;
@@ -146,7 +154,7 @@
             command = "1password --silent";
           }
           {
-            command = "swaync";
+            command = "${pkgs.mako}/bin/mako";
             always = true;
           }
         ];
@@ -154,6 +162,22 @@
     extraConfig = ''
       output "*" bg /home/${vars.user}/.background-image fill
     '';
+  };
+
+  programs.i3blocks = {
+    enable = true;
+    bars = {
+      top = {
+        bat = {
+          command = "acpi | awk '{print $4}' | tr -d \,";
+          interval = 5;
+        };
+        time = lib.hm.dag.entryAfter [ "bat" ] {
+          command = "date";
+          interval = 1;
+        };
+      };
+    };
   };
 
   services.swayidle =
@@ -164,10 +188,6 @@
     {
       enable = true;
       timeouts = [
-        # {
-        #   timeout = 300;
-        #   command = "${swaylock} -f -c 000000";
-        # }
         {
           timeout = 300;
           command = "${swaylock} -f -c 000000 && ${swaymsg} \"output * power off\"";
@@ -191,6 +211,10 @@
       enable = true;
       userEmail = "jack@jackbashford.com";
       userName = "Jack Bashford";
+      extraConfig = {
+        init.defaultBranch = "main";
+        credential.helper = "cache";
+      };
     };
 
     ssh =
@@ -209,7 +233,7 @@
       enable = true;
       settings = {
         font-family = "FiraCode Nerd Font";
-        # font-feature = "ss09";
+        font-feature = "ss09";
         font-size = 11;
         confirm-close-surface = false;
         cursor-style = "bar";
@@ -256,7 +280,7 @@
 
       shellAliases = {
         j = "zellij"; # depends on zellij
-        # ls = "lsd -1"; # depends on lsd
+        ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
       };
@@ -279,7 +303,10 @@
         move_down: Some(( code: Char('j'), modifiers: "")),
       '';
     };
-    lsd.enable = true;
+    lsd = {
+      enable = true;
+      enableZshIntegration = false;
+    };
     man.enable = true;
     ripgrep.enable = true;
     scmpuff = {
@@ -287,7 +314,12 @@
       enableAliases = true;
       enableZshIntegration = true;
     };
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        nix_shell.disabled = true;
+      };
+    };
     tealdeer = {
       enable = true;
       settings = {
@@ -298,6 +330,15 @@
     tofi.enable = true;
     waybar.enable = true;
     zoxide.enable = true;
+
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "java"
+        "git-firefly"
+        "make"
+      ];
+    };
   };
 
   home.sessionVariables = {
@@ -305,10 +346,40 @@
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     _JAVA_AWT_WM_NONREPARENTING = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
+    LEDGER_FILE = "~/Documents/Finances/2025.journal";
 
   };
 
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
+
+  # xdg.configFile = {
+  #   "zellij/layouts/yazelix.kdl" = {
+  #     text = ''
+  #       layout {
+  #         pane size=1 borderless=true {
+  #           plugin location="zellij:tab-bar"
+  #         }
+  #         pane split_direction="vertical" {
+  #           pane size="30%" {
+  #             command "yazi"
+  #           }
+  #           pane split_direction="horizontal" {
+  #             pane {
+  #               command "hx"
+  #               args "."
+  #             }
+  #             pane size="30%" {
+  #               // Terminal pane for commands
+  #             }
+  #           }
+  #         }
+  #         pane size=2 borderless=true {
+  #           plugin location="zellij:status-bar"
+  #         }
+  #       }
+  #     '';
+  #   };
+  # };
 }

@@ -19,8 +19,9 @@
     };
     dev = {
       c = true;
-      dafny = true;
+      dafny = false;
       haskell = true;
+      json = true;
       markdown = true;
       nix = true;
       python = true;
@@ -43,6 +44,11 @@
 
     clang
     comma
+
+    zulip
+    amber
+    claws-mail
+    nmh
   ];
 
   programs.yazi = {

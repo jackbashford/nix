@@ -11,6 +11,9 @@
 
     helix.url = "github:helix-editor/helix/master";
     helix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # yazelix.url = "github:luccahuguet/yazelix";
+    # yazelix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -49,10 +52,6 @@
             ./hosts/eepsilon/configuration.nix
             home-manager.nixosModules.home-manager
             catppuccin.nixosModules.catppuccin
-            # {
-            # home-manager.useGlobalPkgs = true;
-            # home-manager.useUserPackages = true;
-            # }
           ];
         };
       };

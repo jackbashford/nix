@@ -8,5 +8,6 @@
     ./dafny.nix
     ./ts.nix
     ./haskell.nix
+    ./json.nix
   ];
 }

@@ -13,10 +13,21 @@
     ../../modules/nixos
   ];
 
+  # boot.initrd.systemd.network.wait-online.enable = false;
+  # boot.initrd.systemd.network.wait-online.anyInterface = true;
+
+  # boot.kernelParams = [
+  #   "nohz=on"
+  #   "nohz_full=0-15"
+  # ];
+
+  programs.wireshark.enable = true;
+
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
       "vscode"
+      "posy-cursors"
     ];
 
   j = {
@@ -32,6 +43,7 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
   environment.sessionVariables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
+  environment.sessionVariables.LEDGER_FILE = "~/Documents/Finances/2025.journal";
   # environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
 
   networking.hostName = "eepsilon";
@@ -46,7 +58,7 @@
     enable = false;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
+  services.blueman.enable = false;
 
   services.fwupd.enable = true;
 
@@ -80,6 +92,7 @@
       "wheel"
       "plugdev"
       "docker"
+      "wireshark"
     ];
     shell = pkgs.zsh;
   };
@@ -98,12 +111,16 @@
     powertop
     power-profiles-daemon
     swaynotificationcenter
+    mako
     chromium
     acpi
     vscode
     # waypipe
     # xorg.xauth
+    wireshark
   ];
+
+  # powerManagement.powertop.enable = true;
 
   services.logind = {
     powerKey = "sleep";
@@ -113,6 +130,7 @@
 
   virtualisation.docker = {
     enable = true;
+    enableOnBoot = false;
   };
 
   system.stateVersion = "24.11";
