@@ -106,44 +106,31 @@
             "${mod2}+Shift+l" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
             "${mod}+s" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\"";
             "--locked XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute \@DEFAULT_SINK@ toggle";
-            "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
             "Shift+XF86AudioRaiseVolume" =
-              "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +1%";
-            "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
+              "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
+            "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +1%";
             "Shift+XF86AudioLowerVolume" =
-              "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -1%";
+              "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
+            "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -1%";
             "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
             "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
             "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
-            "XF86AudioMedia" = "exec ${pkgs.sway}/bin/swaymsg output \"eDP-1\" power toggle";
+            "XF86AudioMedia" =
+              "exec ${pkgs.sway}/bin/swaymsg output \"*\" power off && ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ true";
+            "Shift+XF86AudioMedia" = "exec ${pkgs.sway}/bin/swaymsg output \"eDP-1\" power on";
+            "Ctrl+Shift+XF86AudioMedia" = "exec ${pkgs.sway}/bin/swaymsg output \"*\" power on";
           }
         );
         bars = [
-          # {
-          #   position = "top";
-          #   command = "waybar";
-          # }
           {
             position = "top";
             colors = {
               statusline = "#ffffff";
               background = "#323232";
-              # inactiveWorkspace = {
-              #   background = "#32323200";
-              #   border = "#32323200";
-              #   text = "#5c5c5c";
-              # };
             };
-            statusCommand = "while date +'%Y-%m-%d %X'; do sleep 1; done";
+            statusCommand = "${pkgs.i3blocks}/bin/i3blocks -c /home/${vars.user}/.config/i3blocks/top";
+            # statusCommand = "waybar";
           }
-          # {
-          #   position = "top";
-          #   colors = {
-          #     statusline = "#ffffff";
-          #     background = "#323232";
-          #   };
-          #   statusCommand = "while acpi; do sleep 60; done";
-          # }
         ];
         startup = [
           {
