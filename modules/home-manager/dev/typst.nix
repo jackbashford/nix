@@ -17,14 +17,20 @@ in
       pkgs.typst
       pkgs.tinymist
       pkgs.typstyle
+      pkgs.nodePackages.cspell
     ];
 
     programs.helix.languages = lib.mkIf cfg.helix.enable {
       language-server.tinymist = {
         command = "${pkgs.tinymist}/bin/tinymist";
         config = {
-          exportPdf = "onSave";
+          exportPdf = "onType";
         };
+      };
+
+      langauge-server.cspell = {
+        command = "cspell-lsp";
+        args = [ "--stdio" ];
       };
 
       language = [
@@ -37,7 +43,10 @@ in
             unit = "  ";
           };
           formatter.command = "${pkgs.typstyle}/bin/typstyle";
-          language-servers = [ "tinymist" ];
+          language-servers = [
+            "tinymist"
+            "cspell"
+          ];
         }
       ];
     };

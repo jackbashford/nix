@@ -32,11 +32,15 @@ in
             normal = "block";
             select = "underline";
           };
-          lsp.display-messages = true;
+          lsp = {
+            display-messages = true;
+            display-inlay-hints = true;
+          };
           search.smart-case = false;
           bufferline = "multiple";
           jump-label-alphabet = "ghfjdksla;tyvbrucneixmwoz";
           inline-diagnostics.cursor-line = "warning";
+          idle-timeout = 0;
         };
 
         keys = {
@@ -50,10 +54,17 @@ in
             C-h = "goto_previous_buffer";
             C-l = "goto_next_buffer";
             space = {
-              W = [
-                ":lang text"
-                ":write"
+              W = ":write --no-format";
+              g = [
+                ":new"
+                ":insert-output ${pkgs.lazygit}/bin/lazygit"
+                ":buffer-close!"
+                ":redraw"
               ];
+              # "[" = [
+              #   ":new"
+              #   ":insert-output ${pkgs.yazi}/bin/yazi"
+              # ];
             };
           };
           insert = {

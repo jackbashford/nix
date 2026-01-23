@@ -49,6 +49,8 @@
     amber
     claws-mail
     nmh
+    thunderbird
+    calcurse
   ];
 
   programs.yazi = {

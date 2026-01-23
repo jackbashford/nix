@@ -56,7 +56,7 @@
       openFirewall = true;
     };
 
-    services.displayManager.ly.enable = true;
+    services.displayManager.sddm.enable = true;
     services.tailscale.enable = true;
     services.openssh.enable = true;
 
@@ -96,6 +96,8 @@
       "flakes"
     ];
 
+    # users.users."${vars.user}".extraGroups = [ "seat" ];
+
     environment.systemPackages = with pkgs; [
       vim
       wget
@@ -114,20 +116,11 @@
       linux-manual
       man-pages
       man-pages-posix
-
-      globalprotect-openconnect
       polkit_gnome
       networkmanagerapplet
       vlc
     ];
-
-    # environment.etc.udev."rules.d"."60-openocd.rules".source =
-    #   "${pkgs.openocd}/etc/udev/rules.d/60-openocd.rules";
-
-    # services.udev.extraRules = ''
-    #   ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="664"
-    #   KERNEL=="hidraw*", ATTRS{idVendor}=="0d28", ATTRS{idProduct}=="0204", MODE="664"
-    # '';
+    # + [ inputs.nixpkgs-qt.pkgs.globalprotect_openconnect ];
 
     services.udev.packages = with pkgs; [ openocd ];
 
@@ -147,9 +140,9 @@
       libraries = [ pkgs.stdenv.cc.cc ];
     };
 
-    virtualisation = {
-      containers.enable = true;
-      podman.enable = true;
-    };
+    # virtualisation = {
+    #   containers.enable = true;
+    #   podman.enable = true;
+    # };
   };
 }

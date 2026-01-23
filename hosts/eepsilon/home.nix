@@ -46,6 +46,10 @@
     zathura
     wl-clipboard
     hledger
+    jetbrains.idea-community
+    lazygit
+    isabelle
+    vlc
   ];
 
   # home.pointerCursor = {
@@ -234,7 +238,6 @@
         window-inherit-working-directory = false;
         working-directory = "home";
         macos-option-as-alt = "left";
-        custom-shader = null;
       };
     };
 
@@ -259,10 +262,11 @@
       };
 
       initContent = ''
-        setopt INC_APPEND_HISTORY
-        bindkey "^[[3~" delete-char
-        bindkey "^[[1;5C" forward-word
-        bindkey "^[[1;5D" backward-word
+                setopt INC_APPEND_HISTORY
+                bindkey "^[[3~" delete-char
+                bindkey "^[[1;5C" forward-word
+                bindkey "^[[1;5D" backward-word
+        	[[ "`seq 1 10 | shuf | head -1`" == 1 ]] && echo 'hewwo! ^_^' || true
       '';
 
       shellAliases = {
@@ -270,6 +274,7 @@
         ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
+        y = "yy";
       };
     };
 

@@ -22,6 +22,8 @@
 
       window-inherit-working-directory = false;
       working-directory = "home";
+
+      custom-shader = "~/.config/ghostty/ghostty-shaders/underwater.glsl";
     };
   };
 

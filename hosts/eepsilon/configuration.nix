@@ -54,11 +54,33 @@
     enable = true;
   };
 
+  # programs.nix-ld = {
+  #   enable = true;
+  #   libraries = with pkgs; [
+  #     glib
+  #     nss
+  #     nspr
+  #     at-spi2-atk
+  #     cups
+  #     dbus
+  #     libdrm
+  #     gtk3
+  #     # libx11
+  #     libxcomposite
+  #     libxdamage
+  #     libxext
+  #     libxfixes
+  #     libxrandr
+  #     pango
+  #     cairo
+  #   ];
+  # };
+
   hardware.bluetooth = {
-    enable = false;
+    enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = false;
+  services.blueman.enable = true;
 
   services.fwupd.enable = true;
 
@@ -90,7 +112,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "plugdev"
+      # "plugdev"
       "docker"
       "wireshark"
     ];
