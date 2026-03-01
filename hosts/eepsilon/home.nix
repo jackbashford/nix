@@ -50,6 +50,9 @@
     lazygit
     isabelle
     vlc
+    kdePackages.kwallet
+    haskell.compiler.ghc912
+    icu
   ];
 
   # home.pointerCursor = {

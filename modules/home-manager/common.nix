@@ -51,6 +51,7 @@
     nmh
     thunderbird
     calcurse
+    file
   ];
 
   programs.yazi = {

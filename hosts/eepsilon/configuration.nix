@@ -16,10 +16,11 @@
   # boot.initrd.systemd.network.wait-online.enable = false;
   # boot.initrd.systemd.network.wait-online.anyInterface = true;
 
-  # boot.kernelParams = [
-  #   "nohz=on"
-  #   "nohz_full=0-15"
-  # ];
+  boot.kernelParams = [
+    #   "nohz=on"
+    #   "nohz_full=0-15"
+    "kvm.enable_virt_at_load=0"
+  ];
 
   programs.wireshark.enable = true;
 
@@ -115,9 +116,12 @@
       # "plugdev"
       "docker"
       "wireshark"
+      "vboxusers"
     ];
     shell = pkgs.zsh;
   };
+
+  virtualisation.virtualbox.host.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
@@ -140,6 +144,7 @@
     # waypipe
     # xorg.xauth
     wireshark
+    libxcrypt-legacy
   ];
 
   # powerManagement.powertop.enable = true;
