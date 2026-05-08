@@ -16,16 +16,25 @@
     boot.loader.grub.efiSupport = true;
     boot.loader.grub.device = "nodev";
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.kernelModules = [ "uinput" ];
 
     hardware.uinput.enable = true;
 
     fonts = {
-      packages = [
-        pkgs.fira-code
-        pkgs.nerd-fonts.fira-code
-        pkgs.vistafonts
+      packages = with pkgs; [
+        fira-code
+        nerd-fonts.fira-code
+        vista-fonts
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-color-emoji
+        liberation_ttf
+        fira-code
+        fira-code-symbols
+        mplus-outline-fonts.githubRelease
+        dina-font
+        proggyfonts
       ];
       fontDir.enable = true;
     };
@@ -60,8 +69,6 @@
     services.tailscale.enable = true;
     services.openssh.enable = true;
 
-    services.globalprotect.enable = true;
-
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
@@ -83,7 +90,7 @@
 
     programs.java = {
       enable = true;
-      package = pkgs.jdk23;
+      package = pkgs.jdk25;
     };
 
     nixpkgs.config.allowUnfree = true;
@@ -119,8 +126,8 @@
       polkit_gnome
       networkmanagerapplet
       vlc
+      gpclient
     ];
-    # + [ inputs.nixpkgs-qt.pkgs.globalprotect_openconnect ];
 
     services.udev.packages = with pkgs; [ openocd ];
 
@@ -140,9 +147,11 @@
       libraries = [ pkgs.stdenv.cc.cc ];
     };
 
-    # virtualisation = {
-    #   containers.enable = true;
-    #   podman.enable = true;
-    # };
+    nix.optimise.automatic = true;
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
 }

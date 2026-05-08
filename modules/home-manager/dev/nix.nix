@@ -15,11 +15,16 @@ in
   config = lib.mkIf cfg.dev.nix {
     home.packages = [
       pkgs.nil
-      pkgs.nixfmt-rfc-style
+      pkgs.nixfmt
     ];
 
     programs.helix.languages = lib.mkIf cfg.helix.enable {
-      language-server.nil.command = "${pkgs.nil}/bin/nil";
+      language-server.nil = {
+        command = "${pkgs.nil}/bin/nil";
+        config = {
+          flake.autoArchive = false;
+        };
+      };
 
       language = [
         {

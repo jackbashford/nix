@@ -23,6 +23,10 @@ in
         command = "${pkgs.ruff}/bin/ruff";
         args = [ "server" ];
       };
+      language-server.ty = {
+        command = "${pkgs.ty}/bin/ty";
+        args = [ "server" ];
+      };
       language = [
         {
           name = "python";
@@ -37,6 +41,7 @@ in
           language-servers = [
             "ruff"
             "pylsp"
+            "ty"
           ];
           formatter = {
             command = "${pkgs.ruff}/bin/ruff";

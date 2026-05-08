@@ -6,6 +6,12 @@
   lib,
   ...
 }:
+let
+  stm32pkgs = import inputs.stm32cubeide {
+    system = "x86_64-linux";
+    config.allowUnfree = true;
+  };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -22,13 +28,22 @@
     "kvm.enable_virt_at_load=0"
   ];
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
   programs.wireshark.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
       "vscode"
       "posy-cursors"
+      "stm32cubeide"
     ];
 
   j = {
@@ -39,13 +54,12 @@
       dlayer = true;
     };
     graphics.enable = true;
+    # xilinx-udev.enable = true;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
   environment.sessionVariables._JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
-  environment.sessionVariables.LEDGER_FILE = "~/Documents/Finances/2025.journal";
-  # environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
 
   networking.hostName = "eepsilon";
 
@@ -55,27 +69,12 @@
     enable = true;
   };
 
-  # programs.nix-ld = {
-  #   enable = true;
-  #   libraries = with pkgs; [
-  #     glib
-  #     nss
-  #     nspr
-  #     at-spi2-atk
-  #     cups
-  #     dbus
-  #     libdrm
-  #     gtk3
-  #     # libx11
-  #     libxcomposite
-  #     libxdamage
-  #     libxext
-  #     libxfixes
-  #     libxrandr
-  #     pango
-  #     cairo
-  #   ];
-  # };
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      swt
+    ];
+  };
 
   hardware.bluetooth = {
     enable = true;
@@ -88,24 +87,7 @@
   # In case sway dies :3
   services.desktopManager.plasma6.enable = true;
 
-  # services.gnome.gnome-keyring.enable = true;
   programs.sway.enable = true;
-  # programs.sway.wrapperFeatures.gtk = true;
-
-  # programs.nix-ld = {
-  #   enable = true;
-  #   libraries = [ ];
-  # };
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "0 * * * * jack cp $HOME/.zsh_history $HOME/.cache/zsh_history_git && git -C $HOME/.cache/zsh_history_git add . && git -C $HOME/.cache/zsh_history_git commit -m 'history backup'"
-    ];
-  };
-
-  # programs.ssh.setXAuthLocation = true;
-  # programs.ssh.forwardX11 = true;
 
   users.users."${vars.user}" = {
     isNormalUser = true;
@@ -132,27 +114,29 @@
     backupFileExtension = "hm-bak";
   };
 
-  environment.systemPackages = with pkgs; [
-    fprintd
-    powertop
-    power-profiles-daemon
-    swaynotificationcenter
-    mako
-    chromium
-    acpi
-    vscode
-    # waypipe
-    # xorg.xauth
-    wireshark
-    libxcrypt-legacy
-  ];
-
-  # powerManagement.powertop.enable = true;
+  environment.systemPackages =
+    with pkgs;
+    [
+      fprintd
+      powertop
+      power-profiles-daemon
+      swaynotificationcenter
+      mako
+      chromium
+      acpi
+      vscode
+      wireshark
+      libxcrypt-legacy
+    ]
+    ++ ([ stm32pkgs.stm32cubeide_1_19_0 ]);
 
   services.logind = {
-    powerKey = "sleep";
-    powerKeyLongPress = "poweroff";
-    lidSwitch = "sleep";
+    enable = true;
+    settings.Login = {
+      HandlePowerKey = "sleep";
+      HandlePowerKeyLongPress = "poweroff";
+      HandleLidSwitch = "sleep";
+    };
   };
 
   virtualisation.docker = {

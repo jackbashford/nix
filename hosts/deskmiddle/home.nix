@@ -52,15 +52,16 @@
     pkgs.spotify
     pkgs.chromium
 
-    pkgs.jetbrains.idea-community
     pkgs.digital
   ];
 
   programs = {
     git = {
       enable = true;
-      userEmail = "jack@jackbashford.com";
-      userName = "Jack Bashford";
+      settings = {
+        userEmail = "jack@jackbashford.com";
+        userName = "Jack Bashford";
+      };
     };
 
     ssh =

@@ -19,7 +19,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      package = lib.mkDefault inputs.helix.packages.${pkgs.hostPlatform.system}.default;
+      # package = lib.mkDefault inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
       defaultEditor = cfg.defaultEditor;
       settings = {
         editor = {

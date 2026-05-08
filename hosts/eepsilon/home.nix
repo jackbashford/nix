@@ -34,25 +34,24 @@
 
     cntr
 
-    jetbrains.idea-community
     onlyoffice-desktopeditors
     vscodium
 
     font-awesome
-    noto-fonts-emoji
+    noto-fonts-color-emoji
 
     obs-studio
     kdePackages.okular
     zathura
     wl-clipboard
     hledger
-    jetbrains.idea-community
     lazygit
     isabelle
     vlc
     kdePackages.kwallet
     haskell.compiler.ghc912
     icu
+    verible
   ];
 
   # home.pointerCursor = {
@@ -188,16 +187,11 @@
           resumeCommand = "${swaymsg} \"output * power on\"";
         }
       ];
-      events = [
-        {
-          event = "before-sleep";
-          command = "${swaylock} -f -c 000000";
-        }
-        {
-          event = "lock";
-          command = "${swaylock} -f -c 000000";
-        }
-      ];
+      events = {
+
+        "before-sleep" = "${swaylock} -f -c 000000";
+        "lock" = "${swaylock} -f -c 000000";
+      };
     };
 
   programs = {
@@ -235,7 +229,7 @@
         gtk-single-instance = true;
 
         gtk-titlebar = false;
-        window-decoration = false;
+        window-decoration = "auto";
         window-theme = "ghostty";
 
         window-inherit-working-directory = false;
@@ -277,7 +271,6 @@
         ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
-        y = "yy";
       };
     };
 

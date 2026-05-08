@@ -37,9 +37,7 @@
     cntr
     delta
 
-    jetbrains.idea-community
-    jdk23
-    python311Full
+    python315
     digital
 
     clang
@@ -52,11 +50,13 @@
     thunderbird
     calcurse
     file
+    glow
   ];
 
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "y";
   };
 
   programs.zellij = {
@@ -81,16 +81,13 @@
     };
   };
 
-  programs.git.delta = {
+  programs.delta = {
+    enableGitIntegration = true;
     enable = true;
     options = {
       # dark = fals;
       line-numbers = true;
     };
-  };
-
-  programs.ghostty.settings = {
-    gtk-adwaita = false;
   };
 
   gtk.gtk3.extraCss = ''

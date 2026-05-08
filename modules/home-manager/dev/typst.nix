@@ -17,7 +17,7 @@ in
       pkgs.typst
       pkgs.tinymist
       pkgs.typstyle
-      pkgs.nodePackages.cspell
+      pkgs.cspell
     ];
 
     programs.helix.languages = lib.mkIf cfg.helix.enable {

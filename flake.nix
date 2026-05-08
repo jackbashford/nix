@@ -3,18 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-qt.url = "github:nixos/nixpkgs/nixos-unstable?rev=005433b926e16227259a1843015b5b2b7f7d1fc3";
 
     catppuccin.url = "github:catppuccin/nix";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    helix.url = "github:helix-editor/helix/master";
-    helix.inputs.nixpkgs.follows = "nixpkgs";
+    # helix.url = "github:helix-editor/helix/master";
+    # helix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # yazelix.url = "github:luccahuguet/yazelix";
-    # yazelix.inputs.nixpkgs.follows = "nixpkgs";
+    stm32cubeide.url = "github:sempiternal-aurora/nixpkgs/stm32cubeide";
   };
 
   outputs =
