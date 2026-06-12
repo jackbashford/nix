@@ -54,7 +54,7 @@ in
       dlayer = true;
     };
     graphics.enable = true;
-    # xilinx-udev.enable = true;
+    xilinx-udev.enable = true; # not just xilinx udev but also stm32 udev
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -127,6 +127,7 @@ in
       vscode
       wireshark
       libxcrypt-legacy
+      ncurses5
     ]
     ++ ([ stm32pkgs.stm32cubeide_1_19_0 ]);
 

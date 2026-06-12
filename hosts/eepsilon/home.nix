@@ -52,6 +52,7 @@
     haskell.compiler.ghc912
     icu
     verible
+    senpai
   ];
 
   # home.pointerCursor = {
