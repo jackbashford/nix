@@ -7,6 +7,10 @@
   ...
 }:
 {
+  imports = [
+    inputs.mangowm.nixosModules.mango
+  ];
+
   config = {
     catppuccin.enable = true;
     catppuccin.flavor = vars.flavor;
@@ -80,7 +84,7 @@
 
     programs.zsh.enable = true;
 
-    programs.firefox.enable = true;
+    # programs.firefox.enable = true;
 
     programs._1password.enable = true;
     programs._1password-gui = {
@@ -103,7 +107,9 @@
       "flakes"
     ];
 
-    # users.users."${vars.user}".extraGroups = [ "seat" ];
+    programs.mango = {
+      enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
       vim
@@ -152,6 +158,13 @@
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
+    };
+
+    nix.settings = {
+      extra-substituters = [ "https://noctalia.cachix.org" ];
+      extra-trusted-public-keys = [
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      ];
     };
   };
 }

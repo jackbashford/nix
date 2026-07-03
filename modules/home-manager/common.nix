@@ -6,6 +6,11 @@
   ...
 }:
 {
+  imports = [
+    inputs.noctalia.homeModules.default
+    inputs.mangowm.hmModules.mango
+  ];
+
   home.sessionPath = [ "$HOME/.local/bin" ];
 
   catppuccin.enable = true;
@@ -43,14 +48,13 @@
     clang
     comma
 
-    zulip
-    amber
-    claws-mail
     nmh
-    thunderbird
     calcurse
     file
     glow
+    hledger
+    hledger-ui
+    hledger-web
   ];
 
   programs.yazi = {
@@ -85,8 +89,28 @@
     enableGitIntegration = true;
     enable = true;
     options = {
-      # dark = fals;
       line-numbers = true;
+    };
+  };
+
+  wayland.windowManager.mango = {
+    enable = true;
+
+    autostart_sh = "noctalia";
+    settings = {
+      bind = [
+        "SUPER,Return,spawn,ghostty"
+        "SUPER,d,spawn,noctalia msg panel-toggle launcher"
+        "SUPER,space,togglefloating"
+        "SUPER,f,togglefullscreen"
+        "SUPER+SHIFT,q,killclient"
+        "SUPER+SHIFT,c,reload_config"
+        "SUPER+SHIFT,e,quit"
+      ];
+
+      monitorrule = [
+        "name:^eDP-1$,width:2256,height:1504,refresh:60,scale:1.2"
+      ];
     };
   };
 
@@ -109,4 +133,46 @@
         box-shadow: 0 0 0 0;
     }
   '';
+
+  xdg.desktopEntries = {
+    jabref = {
+      categories = [
+        "Literature"
+        "Science"
+        "Education"
+      ];
+      exec = "jabref";
+      genericName = "Bibliography";
+      mimeType = [ ];
+      name = "JabRef";
+      terminal = false;
+    };
+  };
+
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts = with pkgs; [
+      gnome-browser-connector
+      jabref
+    ];
+    configPath = ".mozilla/firefox";
+  };
+
+  programs.noctalia = {
+    enable = true;
+    systemd.enable = true;
+
+    settings = {
+      theme = {
+        mode = "dark";
+        source = "builtin";
+        builtin = "Catppuccin";
+      };
+
+      wallpaper = {
+        enabled = true;
+        default.path = "~/fuji-bg-cropped.webp";
+      };
+    };
+  };
 }

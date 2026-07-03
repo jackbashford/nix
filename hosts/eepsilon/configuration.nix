@@ -6,21 +6,12 @@
   lib,
   ...
 }:
-let
-  stm32pkgs = import inputs.stm32cubeide {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-in
 {
   imports = [
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     ../../modules/nixos
   ];
-
-  # boot.initrd.systemd.network.wait-online.enable = false;
-  # boot.initrd.systemd.network.wait-online.anyInterface = true;
 
   boot.kernelParams = [
     #   "nohz=on"
@@ -43,7 +34,6 @@ in
     builtins.elem (lib.getName pkg) [
       "vscode"
       "posy-cursors"
-      "stm32cubeide"
     ];
 
   j = {
@@ -54,7 +44,6 @@ in
       dlayer = true;
     };
     graphics.enable = true;
-    xilinx-udev.enable = true; # not just xilinx udev but also stm32 udev
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -67,13 +56,6 @@ in
 
   services.fprintd = {
     enable = true;
-  };
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      swt
-    ];
   };
 
   hardware.bluetooth = {
@@ -95,15 +77,12 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
-      # "plugdev"
       "docker"
       "wireshark"
       "vboxusers"
     ];
     shell = pkgs.zsh;
   };
-
-  virtualisation.virtualbox.host.enable = true;
 
   home-manager = {
     extraSpecialArgs = {
@@ -114,22 +93,18 @@ in
     backupFileExtension = "hm-bak";
   };
 
-  environment.systemPackages =
-    with pkgs;
-    [
-      fprintd
-      powertop
-      power-profiles-daemon
-      swaynotificationcenter
-      mako
-      chromium
-      acpi
-      vscode
-      wireshark
-      libxcrypt-legacy
-      ncurses5
-    ]
-    ++ ([ stm32pkgs.stm32cubeide_1_19_0 ]);
+  environment.systemPackages = with pkgs; [
+    powertop
+    power-profiles-daemon
+    swaynotificationcenter
+    mako
+    chromium
+    acpi
+    vscode
+    wireshark
+    libxcrypt-legacy
+    ncurses5
+  ];
 
   services.logind = {
     enable = true;

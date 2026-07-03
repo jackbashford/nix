@@ -9,10 +9,8 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # helix.url = "github:helix-editor/helix/master";
-    # helix.inputs.nixpkgs.follows = "nixpkgs";
-
-    stm32cubeide.url = "github:sempiternal-aurora/nixpkgs/stm32cubeide";
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    mangowm.url = "github:mangowm/mango";
   };
 
   outputs =
@@ -45,7 +43,7 @@
           specialArgs = {
             inherit inputs;
             vars.user = "jack";
-            vars.flavor = "latte";
+            vars.flavor = "mocha";
           };
           modules = [
             ./hosts/eepsilon/configuration.nix
