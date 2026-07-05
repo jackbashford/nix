@@ -4,8 +4,7 @@
     ./helix.nix
     ./i3.nix
     ./ghostty.nix
-    # ./haskell.nix
-    # ./zellij.nix
+    ./mango.nix
 
     ./dev
   ];

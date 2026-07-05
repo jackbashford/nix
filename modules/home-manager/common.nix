@@ -6,17 +6,13 @@
   ...
 }:
 {
-  imports = [
-    inputs.noctalia.homeModules.default
-    inputs.mangowm.hmModules.mango
-  ];
-
   home.sessionPath = [ "$HOME/.local/bin" ];
 
   catppuccin.enable = true;
   catppuccin.zsh-syntax-highlighting.enable = false;
 
   j = {
+    mango = true;
     helix = {
       enable = true;
       defaultEditor = true;
@@ -94,19 +90,29 @@
   };
 
   wayland.windowManager.mango = {
-    enable = true;
+    # enable = true;
 
-    autostart_sh = "noctalia";
+    # autostart_sh = "noctalia";
     settings = {
-      bind = [
-        "SUPER,Return,spawn,ghostty"
-        "SUPER,d,spawn,noctalia msg panel-toggle launcher"
-        "SUPER,space,togglefloating"
-        "SUPER,f,togglefullscreen"
-        "SUPER+SHIFT,q,killclient"
-        "SUPER+SHIFT,c,reload_config"
-        "SUPER+SHIFT,e,quit"
-      ];
+      # bind = [
+      #   "SUPER,Return,spawn,ghostty"
+      #   "SUPER,d,spawn,noctalia msg panel-toggle launcher"
+      #   "SUPER,space,togglefloating"
+      #   "SUPER,f,togglefullscreen"
+      #   "SUPER+SHIFT,q,killclient"
+      #   "SUPER,h,focusdir,left"
+      #   "SUPER,l,focusdir,right"
+      #   "SUPER,k,focusdir,up"
+      #   "SUPER,j,focusdir,down"
+      #   "SUPER+SHIFT,c,reload_config"
+      #   "SUPER+SHIFT,e,quit"
+      #   "NONE,XF86MonBrightnessUp,spawn,brightnessctl s +10%"
+      #   "NONE,XF86MonBrightnessDown,spawn,brightnessctl s -10%"
+      #   "NONE,XF86AudioRaiseVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ +1%"
+      #   "NONE,XF86AudioLowerVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ -1%"
+      #   "SHIFT,XF86AudioRaiseVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ +10%"
+      #   "SHIFT,XF86AudioLowerVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ -10%"
+      # ];
 
       monitorrule = [
         "name:^eDP-1$,width:2256,height:1504,refresh:60,scale:1.2"

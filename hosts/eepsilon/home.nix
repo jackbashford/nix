@@ -24,7 +24,6 @@
   catppuccin.zsh-syntax-highlighting.enable = false;
   catppuccin.fzf.enable = true;
   catppuccin.fzf.flavor = vars.flavor;
-  catppuccin.fzf.accent = "pink";
 
   home.packages = with pkgs; [
     jabref
