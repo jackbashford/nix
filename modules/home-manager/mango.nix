@@ -17,6 +17,11 @@ in
   ];
 
   config = {
+    home.packages = with pkgs; [
+      ghostty
+      grim
+      slurp
+    ];
     wayland.windowManager.mango = {
       enable = cfg;
 
@@ -32,6 +37,7 @@ in
               "SUPER+SHIFT,q,killclient"
               "SUPER+SHIFT,c,reload_config"
               "SUPER+SHIFT,e,quit"
+              "ALT+SHIFT,l,spawn,loginctl lock-session"
             ];
             focus = [
               "SUPER,h,focusdir,left"
@@ -57,6 +63,7 @@ in
               "NONE,XF86AudioLowerVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ -1%"
               "SHIFT,XF86AudioRaiseVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ +10%"
               "SHIFT,XF86AudioLowerVolume,spawn,pactl set-sink-volume @DEFAULT_SINK@ -10%"
+              "SUPER,s,spawn,grim -g \"$(slurp)\""
             ];
             movement = [
               "SUPER+SHIFT,1,tagsilent,1"
@@ -68,7 +75,10 @@ in
               "SUPER+SHIFT,7,tagsilent,7"
               "SUPER+SHIFT,8,tagsilent,8"
               "SUPER+SHIFT,9,tagsilent,9"
-
+              "SUPER+SHIFT,h,exchange_client,left"
+              "SUPER+SHIFT,l,exchange_client,right"
+              "SUPER+SHIFT,k,exchange_client,up"
+              "SUPER+SHIFT,j,exchange_client,down"
             ];
           in
           basic ++ focus ++ media ++ movement;

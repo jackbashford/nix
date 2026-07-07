@@ -210,7 +210,7 @@
         };
         extraConfig = ''
           Host *
-              IdentityAgent ${onePassPath}
+            IdentityAgent ${onePassPath}
         '';
       };
 
