@@ -80,6 +80,7 @@
       "docker"
       "wireshark"
       "vboxusers"
+      "input"
     ];
     shell = pkgs.zsh;
   };

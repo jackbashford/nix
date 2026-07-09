@@ -21,6 +21,8 @@ in
       ghostty
       grim
       slurp
+      brightnessctl
+      pulseaudio
     ];
     wayland.windowManager.mango = {
       enable = cfg;
@@ -92,6 +94,51 @@ in
           "none,up,4,toggleoverview"
           "none,down,4,toggleoverview"
         ];
+        border_radius = 12;
+      };
+    };
+
+    programs.noctalia = {
+      enable = true;
+      systemd.enable = true;
+
+      settings = {
+        theme = {
+          mode = "dark";
+          source = "builtin";
+          builtin = "Catppuccin";
+        };
+
+        wallpaper = {
+          enabled = true;
+          default.path = "~/fuji-bg-cropped.webp";
+        };
+
+        widget = {
+          workspaces = {
+            hide_when_empty = true;
+          };
+          network = {
+            show_label = false;
+          };
+        };
+
+        bar = {
+          main = {
+            margin_ends = 0;
+            margin_edge = 0;
+            capsule = true;
+            background_opacity = 0.0;
+            start = [ "workspaces" ];
+            center = [ "clock" ];
+            end = [
+              "tray"
+              "notifications"
+              "network"
+              "battery"
+            ];
+          };
+        };
       };
     };
   };
