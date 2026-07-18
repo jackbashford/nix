@@ -62,6 +62,10 @@
     };
 
     services.printing.enable = true;
+    services.printing.drivers = with pkgs; [
+      hplip
+      hplipWithPlugin
+    ];
 
     services.avahi = {
       enable = true;

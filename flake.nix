@@ -43,7 +43,7 @@
           specialArgs = {
             inherit inputs;
             vars.user = "jack";
-            vars.flavor = "mocha";
+            vars.flavor = "latte";
           };
           modules = [
             ./hosts/eepsilon/configuration.nix

@@ -29,6 +29,8 @@ in
 
       autostart_sh = "noctalia";
       settings = {
+        animation_type_open = "zoom";
+        animation_type_close = "zoom";
         bind =
           let
             basic = [
@@ -81,6 +83,10 @@ in
               "SUPER+SHIFT,l,exchange_client,right"
               "SUPER+SHIFT,k,exchange_client,up"
               "SUPER+SHIFT,j,exchange_client,down"
+              "SUPER+SHIFT+CTRL,h,tagmon,left"
+              "SUPER+SHIFT+CTRL,l,tagmon,right"
+              "SUPER+SHIFT+CTRL,k,tagmon,up"
+              "SUPER+SHIFT+CTRL,j,tagmon,down"
             ];
           in
           basic ++ focus ++ media ++ movement;
@@ -94,7 +100,20 @@ in
           "none,up,4,toggleoverview"
           "none,down,4,toggleoverview"
         ];
+        tagrule = [
+          "id:8,layout_name:vertical_scroller"
+          "id:9,layout_name:scroller"
+        ];
         border_radius = 12;
+        gappoh = 5;
+        gappov = 5;
+        focus_cross_monitor = 1;
+        # animations
+        animation_duration_move = 200;
+        animation_duration_open = 200;
+        animation_duration_tag = 200;
+        animation_duration_close = 200;
+        animation_duration_focus = 0;
       };
     };
 
@@ -127,8 +146,12 @@ in
           main = {
             margin_ends = 0;
             margin_edge = 0;
-            capsule = true;
-            background_opacity = 0.0;
+            radius_top_left = 0;
+            radius_top_right = 0;
+            radius_bottom_left = -12;
+            radius_bottom_right = -12;
+            # capsule = true;
+            # background_opacity = 0.0;
             start = [ "workspaces" ];
             center = [ "clock" ];
             end = [
