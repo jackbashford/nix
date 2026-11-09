@@ -14,7 +14,8 @@ in
   };
   config = lib.mkIf cfg.dev.c {
     home.packages = [
-      (lib.hiPrio pkgs.gcc)
+      # (lib.hiPrio pkgs.gcc)
+      pkgs.clang
       pkgs.clang-tools
       pkgs.gf
     ];

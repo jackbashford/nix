@@ -26,6 +26,24 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  security.pki.certificates = [
+    ''
+      -----BEGIN CERTIFICATE-----
+      MIICFzCCAb6gAwIBAgIQVNwc1/mC12YD1qTNNTaHhTAKBggqhkjOPQQDAjAxMQ4w
+      DAYDVQQKEwVtZXNoTzEfMB0GA1UEAxMWbWVzaE8gTWFuYWdlciBMb2NhbCBDQTAe
+      Fw0yNjA5MDkwNjMwNTFaFw0yODA5MDgwNjMwNTFaMBcxFTATBgNVBAMTDE9jZWFu
+      aWFzLU1CUDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABG45rcKNYETjrfelRtoj
+      kWFPDUEJG7IgKKO9CuCma0DI9LcBe7mtXDQYpqizu4FU+Nk9PtRnhgamCqtTnqNZ
+      jr+jgdEwgc4wCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCA4gwEwYDVR0lBAwwCgYI
+      KwYBBQUHAwEwHQYDVR0OBBYEFJ4xKG5nIBuUPMMnJrfxT4IIQCaSMB8GA1UdIwQY
+      MBaAFLiGeJuy0fVTkzwIIjttbYEDBm66MFwGA1UdEQRVMFOCDE9jZWFuaWFzLU1C
+      UIIST2NlYW5pYXMtTUJQLmxvY2FsghhPY2Vhbmlhcy1NQlAubG9jYWxkb21haW6C
+      CWxvY2FsaG9zdIcEfwAAAYcEwKgAMDAKBggqhkjOPQQDAgNHADBEAiBZttuusvqu
+      jugCFcXqsnp7e/jgk9oahx9N9P+uNVAEHQIgY5US6LqUI+GOuwhbHYQToa2f3wIG
+      XLQ9An1NhOopsF8=
+      -----END CERTIFICATE-----''
+  ];
+
   programs.wireshark.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -105,6 +123,8 @@
     wireshark
     libxcrypt-legacy
     ncurses5
+    dsda-doom
+    dsda-launcher
   ];
 
   services.logind = {

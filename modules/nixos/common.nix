@@ -9,6 +9,7 @@
 {
   imports = [
     inputs.mangowm.nixosModules.mango
+    inputs.nix-index-database.nixosModules.default
   ];
 
   config = {
@@ -123,7 +124,6 @@
       btop
       nerd-fonts.fira-code
       devenv
-      digital
       # gcc
       clang-manpages
       openocd
@@ -164,11 +164,11 @@
       options = "--delete-older-than 30d";
     };
 
-    nix.settings = {
-      extra-substituters = [ "https://noctalia.cachix.org" ];
-      extra-trusted-public-keys = [
-        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      ];
-    };
+    # nix.settings = {
+    #   extra-substituters = [ "https://noctalia.cachix.org" ];
+    #   extra-trusted-public-keys = [
+    #     "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    #   ];
+    # };
   };
 }

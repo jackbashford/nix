@@ -14,7 +14,7 @@ in
   };
   config = lib.mkIf cfg.dev.python {
     home.packages = [
-      pkgs.python312Packages.python-lsp-server
+      pkgs.python313Packages.python-lsp-server
       pkgs.ruff
     ];
 
@@ -40,7 +40,7 @@ in
           };
           language-servers = [
             "ruff"
-            "pylsp"
+            # "pylsp"
             "ty"
           ];
           formatter = {

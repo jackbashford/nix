@@ -33,7 +33,8 @@
     rofi
     flameshot
 
-    onlyoffice-desktopeditors
+    # onlyoffice-desktopeditors
+    libreoffice-qt
     vscodium
 
     font-awesome
@@ -43,7 +44,7 @@
     kdePackages.okular
     wl-clipboard
     lazygit
-    isabelle
+    # (isabelle.withComponents (ps: [ ps.isabelle-linter ]))
     kdePackages.kwallet
     haskell.compiler.ghc912
     senpai
@@ -196,22 +197,38 @@
       {
         enable = true;
         enableDefaultConfig = false;
+        matchBlocks = {
+          "anu-gitlab" = {
+            hostname = "gitlab.cecs.anu.edu.au";
+            proxyJump = "cssa-bin-chicken";
+          };
+          "exam-gitlab" = {
+            hostname = "exam-gitlab.cecs.anu.edu.au";
+            proxyJump = "cssa-bin-chicken";
+          };
+          "cssa-bin-chicken" = {
+            hostname = "cssa-bin-chicken-v3.boa-tiaki.ts.net";
+            user = "cssa";
+          };
+          "gadi" = {
+            hostname = "gadi.nci.org.au";
+            user = "jb1405";
+            identityFile = "/home/${vars.user}/.ssh/gadi_jb1405";
+          };
+        };
         matchBlocks."*" = {
           forwardAgent = false;
+          identityAgent = onePassPath;
           addKeysToAgent = "no";
           compression = false;
           serverAliveInterval = 0;
           serverAliveCountMax = 3;
           hashKnownHosts = false;
           userKnownHostsFile = "~/.ssh/known_hosts";
-          controlMaster = "no";
-          controlPath = "~/.ssh/master-%r@%n:%p";
-          controlPersist = "no";
+          # controlMaster = "no";
+          # controlPath = "~/.ssh/master-%r@%n:%p";
+          # controlPersist = "no";
         };
-        extraConfig = ''
-          Host *
-            IdentityAgent ${onePassPath}
-        '';
       };
 
     zsh = {
@@ -247,6 +264,7 @@
         ls = "lsd -1"; # depends on lsd
         cat = "bat"; # depends on bat
         fzhx = "hx $(fzf)"; # depends on helix and fzf
+        renix = "sudo nixos-rebuild switch --flake ~/.config/nix#eepsilon";
       };
     };
 
@@ -301,6 +319,7 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
     _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
     LEDGER_FILE = "~/Documents/Finances/2026.journal";
+    SSH_AUTH_SOCK = "~/.1password/agent.sock";
   };
 
   home.stateVersion = "24.11";

@@ -37,7 +37,7 @@ in
       enable = true;
     };
 
-    catppuccin.rofi.enable = false;
+    # catppuccin.rofi.enable = false;
 
     programs.rofi = lib.mkIf cfg.enable {
       enable = true;
@@ -126,7 +126,8 @@ in
             {
               command = "--no-startup-id ${pkgs.xautolock}/bin/xautolock -time 5 -locker ${pkgs.i3lock}/bin/i3lock -c 000000";
             }
-          ] ++ cfg.extraCmds;
+          ]
+          ++ cfg.extraCmds;
         };
     };
   };

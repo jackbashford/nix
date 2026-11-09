@@ -87,6 +87,7 @@ in
               "SUPER+SHIFT+CTRL,l,tagmon,right"
               "SUPER+SHIFT+CTRL,k,tagmon,up"
               "SUPER+SHIFT+CTRL,j,tagmon,down"
+              "SUPER+SHIFT,p,switch_layout"
             ];
           in
           basic ++ focus ++ media ++ movement;
@@ -104,15 +105,16 @@ in
           "id:8,layout_name:vertical_scroller"
           "id:9,layout_name:scroller"
         ];
+        circle_layout = "tile,vertical_scroller";
         border_radius = 12;
         gappoh = 5;
         gappov = 5;
         focus_cross_monitor = 1;
         # animations
-        animation_duration_move = 200;
-        animation_duration_open = 200;
-        animation_duration_tag = 200;
-        animation_duration_close = 200;
+        animation_duration_move = 80;
+        animation_duration_open = 80;
+        animation_duration_tag = 80;
+        animation_duration_close = 80;
         animation_duration_focus = 0;
       };
     };
@@ -148,8 +150,9 @@ in
             margin_edge = 0;
             radius_top_left = 0;
             radius_top_right = 0;
-            radius_bottom_left = -12;
-            radius_bottom_right = -12;
+            radius_bottom_left = 12;
+            radius_bottom_right = 12;
+            concave_edge_corners = true;
             # capsule = true;
             # background_opacity = 0.0;
             start = [ "workspaces" ];

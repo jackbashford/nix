@@ -13,7 +13,8 @@ in
     j.dev.haskell = lib.mkEnableOption "Add Haskell language support";
   };
   config = lib.mkIf cfg.dev.haskell {
-    home.packages = [
+    home.packages = with pkgs; [
+      haskell-language-server
     ];
 
     # programs.helix.languages = lib.mkIf cfg.helix.enable {
