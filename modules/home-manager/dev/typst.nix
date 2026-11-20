@@ -18,6 +18,7 @@ in
       pkgs.tinymist
       pkgs.typstyle
       pkgs.cspell
+      pkgs.ltex-ls-plus
     ];
 
     programs.helix.languages = lib.mkIf cfg.helix.enable {
@@ -28,7 +29,14 @@ in
         };
       };
 
-      langauge-server.cspell = {
+      language-server.ltex = {
+        command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
+        config = {
+          ltex.language = "en-AU";
+        };
+      };
+
+      language-server.cspell = {
         command = "cspell-lsp";
         args = [ "--stdio" ];
       };
@@ -46,6 +54,7 @@ in
           language-servers = [
             "tinymist"
             "cspell"
+            "ltex"
           ];
         }
       ];

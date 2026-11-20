@@ -39,7 +39,7 @@ in
           search.smart-case = false;
           bufferline = "multiple";
           jump-label-alphabet = "ghfjdksla;tyvbrucneixmwoz";
-          inline-diagnostics.cursor-line = "warning";
+          inline-diagnostics.cursor-line = "info";
           idle-timeout = 0;
         };
 
